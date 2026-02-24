@@ -4,8 +4,36 @@ const year = new Date().getFullYear();
 
 <footer class="border-t border-stone-200 dark:border-stone-700 mt-16">
   <div
-    class="max-w-3xl mx-auto px-4 py-8 text-sm text-stone-500 dark:text-stone-400"
+    class="max-w-3xl mx-auto px-4 py-8 text-sm text-stone-500 dark:text-stone-400 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
   >
     <p>&copy; {year} Anhad Jai Singh</p>
+    <p>
+      Built with
+      <a
+        href="https://astro.build"
+        class="hover:text-accent transition-colors"
+        target="_blank"
+        rel="noopener noreferrer">Astro</a
+      >,
+      <a
+        href="https://pages.cloudflare.com"
+        class="hover:text-accent transition-colors"
+        target="_blank"
+        rel="noopener noreferrer">Cloudflare Pages</a
+      >
+      &
+      <a
+        href="https://claude.ai/code"
+        class="hover:text-accent transition-colors"
+        target="_blank"
+        rel="noopener noreferrer">Claude Code</a
+      >.
+      <a
+        href="https://github.com/anhadjaisingh/website"
+        class="hover:text-accent transition-colors"
+        target="_blank"
+        rel="noopener noreferrer">Source</a
+      >.
+    </p>
   </div>
 </footer>

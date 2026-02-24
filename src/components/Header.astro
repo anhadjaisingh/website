@@ -2,6 +2,7 @@
 import ThemeToggle from "./ThemeToggle.astro";
 
 const navLinks = [
+  { href: "/", label: "Home" },
   { href: "/blog", label: "Blog" },
   { href: "/annotations", label: "Annotations" },
   { href: "/projects", label: "Projects" },
@@ -22,24 +23,30 @@ const currentPath = Astro.url.pathname;
     </a>
 
     <!-- Desktop navigation -->
-    <ul class="hidden md:flex items-center gap-6 text-base">
+    <ul class="hidden md:flex items-center gap-6 text-base font-medium">
       {
-        navLinks.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class:list={[
-                "transition-colors hover:text-accent",
-                currentPath === link.href ||
-                currentPath.startsWith(link.href + "/")
-                  ? "text-accent font-medium"
-                  : "text-stone-600 dark:text-stone-400",
-              ]}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))
+        navLinks.map((link) => {
+          const isActive =
+            link.href === "/"
+              ? currentPath === "/"
+              : currentPath === link.href ||
+                currentPath.startsWith(link.href + "/");
+          return (
+            <li>
+              <a
+                href={link.href}
+                class:list={[
+                  "transition-colors hover:text-accent",
+                  isActive
+                    ? "text-accent font-semibold"
+                    : "text-stone-600 dark:text-stone-400",
+                ]}
+              >
+                {link.label}
+              </a>
+            </li>
+          );
+        })
       }
       <li>
         <ThemeToggle />
@@ -94,24 +101,32 @@ const currentPath = Astro.url.pathname;
     id="mobile-menu"
     class="hidden md:hidden border-t border-stone-200 dark:border-stone-700 bg-slate-50/95 dark:bg-[#0d1520]/95 backdrop-blur-sm"
   >
-    <ul class="max-w-3xl mx-auto px-4 py-3 flex flex-col gap-3 text-base">
+    <ul
+      class="max-w-3xl mx-auto px-4 py-3 flex flex-col gap-3 text-base font-medium"
+    >
       {
-        navLinks.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class:list={[
-                "block py-1 transition-colors hover:text-accent",
-                currentPath === link.href ||
-                currentPath.startsWith(link.href + "/")
-                  ? "text-accent font-medium"
-                  : "text-stone-600 dark:text-stone-400",
-              ]}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))
+        navLinks.map((link) => {
+          const isActive =
+            link.href === "/"
+              ? currentPath === "/"
+              : currentPath === link.href ||
+                currentPath.startsWith(link.href + "/");
+          return (
+            <li>
+              <a
+                href={link.href}
+                class:list={[
+                  "block py-1 transition-colors hover:text-accent",
+                  isActive
+                    ? "text-accent font-semibold"
+                    : "text-stone-600 dark:text-stone-400",
+                ]}
+              >
+                {link.label}
+              </a>
+            </li>
+          );
+        })
       }
     </ul>
   </div>
