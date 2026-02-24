@@ -1,10 +1,14 @@
 <button
   id="theme-toggle"
   aria-label="Toggle dark mode"
-  class="text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100 transition-colors"
+  class="w-10 h-10 rounded-full flex items-center justify-center transition-colors bg-stone-800 text-stone-100 hover:bg-stone-700 dark:bg-stone-200 dark:text-stone-800 dark:hover:bg-stone-300"
 >
-  <span id="theme-icon-light" class="hidden dark:inline">&#9788;</span>
-  <span id="theme-icon-dark" class="inline dark:hidden">&#9790;</span>
+  <span id="theme-icon-light" class="hidden dark:inline text-xl leading-none"
+    >&#9788;</span
+  >
+  <span id="theme-icon-dark" class="inline dark:hidden text-xl leading-none"
+    >&#9790;</span
+  >
 </button>
 
 <script>

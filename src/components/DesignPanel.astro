@@ -1,0 +1,434 @@
+<!--
+  Floating design settings panel for trying out font and color combinations.
+  Drop into BaseLayout to experiment. Remove before merging to main.
+-->
+<div
+  id="design-panel-toggle"
+  class="fixed bottom-4 right-4 z-[999] w-12 h-12 rounded-full bg-stone-800 dark:bg-stone-200 text-stone-100 dark:text-stone-800 flex items-center justify-center cursor-pointer shadow-lg hover:scale-110 transition-transform text-xl"
+  title="Design Settings"
+>
+  ⚙
+</div>
+
+<div
+  id="design-panel"
+  class="fixed bottom-20 right-4 z-[998] w-80 max-h-[80vh] overflow-y-auto rounded-xl shadow-2xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 p-5 hidden"
+>
+  <h3
+    class="font-bold text-sm uppercase tracking-wide text-stone-500 dark:text-stone-400 mb-4"
+  >
+    Design Settings
+  </h3>
+
+  <!-- HEADING FONT -->
+  <div class="mb-5">
+    <label
+      class="block text-xs font-medium text-stone-600 dark:text-stone-300 mb-2"
+      >Heading Font</label
+    >
+    <select
+      id="dp-heading-font"
+      class="w-full text-sm rounded-lg border border-stone-300 dark:border-stone-600 bg-stone-50 dark:bg-stone-700 text-stone-900 dark:text-stone-100 px-3 py-2"
+    >
+      <option value="'Playfair Display', serif"
+        >Playfair Display (current)</option
+      >
+      <option value="'Lora', serif">Lora</option>
+      <option value="'Libre Baskerville', serif">Libre Baskerville</option>
+      <option value="'Source Serif 4', serif">Source Serif 4</option>
+      <option value="'Inter', sans-serif">Inter (sans)</option>
+      <option value="'DM Sans', sans-serif">DM Sans (sans)</option>
+      <option value="'Outfit', sans-serif">Outfit (sans)</option>
+      <option value="'Sora', sans-serif">Sora (sans)</option>
+    </select>
+  </div>
+
+  <!-- BODY FONT -->
+  <div class="mb-5">
+    <label
+      class="block text-xs font-medium text-stone-600 dark:text-stone-300 mb-2"
+      >Body Font</label
+    >
+    <select
+      id="dp-body-font"
+      class="w-full text-sm rounded-lg border border-stone-300 dark:border-stone-600 bg-stone-50 dark:bg-stone-700 text-stone-900 dark:text-stone-100 px-3 py-2"
+    >
+      <option value="'Inter', sans-serif">Inter (current)</option>
+      <option value="'Source Sans 3', sans-serif">Source Sans 3</option>
+      <option value="'DM Sans', sans-serif">DM Sans</option>
+      <option value="'Outfit', sans-serif">Outfit</option>
+      <option value="'Sora', sans-serif">Sora</option>
+      <option value="'Nunito Sans', sans-serif">Nunito Sans</option>
+      <option value="'IBM Plex Sans', sans-serif">IBM Plex Sans</option>
+      <option value="system-ui, sans-serif">System UI</option>
+    </select>
+  </div>
+
+  <!-- BASE FONT SIZE -->
+  <div class="mb-5">
+    <label
+      class="block text-xs font-medium text-stone-600 dark:text-stone-300 mb-2"
+      >Base Font Size: <span id="dp-size-label">16px</span></label
+    >
+    <input
+      id="dp-font-size"
+      type="range"
+      min="14"
+      max="24"
+      value="16"
+      step="1"
+      class="w-full accent-stone-600"
+    />
+  </div>
+
+  <!-- ACCENT COLOR -->
+  <div class="mb-5">
+    <label
+      class="block text-xs font-medium text-stone-600 dark:text-stone-300 mb-2"
+      >Accent Color</label
+    >
+    <div id="dp-accent-colors" class="grid grid-cols-4 gap-2">
+      <button
+        data-accent="#2563eb"
+        data-accent-hover="#1d4ed8"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#2563eb"
+        title="Blue (current)"></button>
+      <button
+        data-accent="#d97706"
+        data-accent-hover="#b45309"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#d97706"
+        title="Amber"></button>
+      <button
+        data-accent="#0d9488"
+        data-accent-hover="#0f766e"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#0d9488"
+        title="Teal"></button>
+      <button
+        data-accent="#e11d48"
+        data-accent-hover="#be123c"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#e11d48"
+        title="Rose"></button>
+      <button
+        data-accent="#16a34a"
+        data-accent-hover="#15803d"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#16a34a"
+        title="Green"></button>
+      <button
+        data-accent="#7c3aed"
+        data-accent-hover="#6d28d9"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#7c3aed"
+        title="Violet"></button>
+      <button
+        data-accent="#ea580c"
+        data-accent-hover="#c2410c"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#ea580c"
+        title="Orange"></button>
+      <button
+        data-accent="#64748b"
+        data-accent-hover="#475569"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#64748b"
+        title="Slate"></button>
+    </div>
+  </div>
+
+  <!-- DARK MODE BG -->
+  <div class="mb-5">
+    <label
+      class="block text-xs font-medium text-stone-600 dark:text-stone-300 mb-2"
+      >Dark Mode Background</label
+    >
+    <div id="dp-dark-bgs" class="grid grid-cols-4 gap-2">
+      <button
+        data-bg="#1c1917"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#1c1917"
+        title="Stone 900 (current)"></button>
+      <button
+        data-bg="#0c0a09"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#0c0a09"
+        title="Stone 950 (warm black)"></button>
+      <button
+        data-bg="#000000"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#000000"
+        title="Pure black"></button>
+      <button
+        data-bg="#0f172a"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#0f172a"
+        title="Slate 900 (navy)"></button>
+      <button
+        data-bg="#18181b"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#18181b"
+        title="Zinc 900 (cool grey)"></button>
+      <button
+        data-bg="#171717"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#171717"
+        title="Neutral 900"></button>
+      <button
+        data-bg="#1a1a2e"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#1a1a2e"
+        title="Deep indigo"></button>
+      <button
+        data-bg="#1a1412"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#1a1412"
+        title="Warm espresso"></button>
+    </div>
+  </div>
+
+  <!-- LIGHT MODE BG -->
+  <div class="mb-5">
+    <label
+      class="block text-xs font-medium text-stone-600 dark:text-stone-300 mb-2"
+      >Light Mode Background</label
+    >
+    <div id="dp-light-bgs" class="grid grid-cols-4 gap-2">
+      <button
+        data-lbg="#fafaf9"
+        class="dp-lbg-btn w-full aspect-square rounded-lg border-2 border-stone-200"
+        style="background:#fafaf9"
+        title="Stone 50 (current)"></button>
+      <button
+        data-lbg="#ffffff"
+        class="dp-lbg-btn w-full aspect-square rounded-lg border-2 border-stone-200"
+        style="background:#ffffff"
+        title="Pure white"></button>
+      <button
+        data-lbg="#faf5ff"
+        class="dp-lbg-btn w-full aspect-square rounded-lg border-2 border-stone-200"
+        style="background:#faf5ff"
+        title="Violet 50"></button>
+      <button
+        data-lbg="#f8fafc"
+        class="dp-lbg-btn w-full aspect-square rounded-lg border-2 border-stone-200"
+        style="background:#f8fafc"
+        title="Slate 50"></button>
+      <button
+        data-lbg="#fffbeb"
+        class="dp-lbg-btn w-full aspect-square rounded-lg border-2 border-stone-200"
+        style="background:#fffbeb"
+        title="Amber 50 (warm)"></button>
+      <button
+        data-lbg="#f0fdf4"
+        class="dp-lbg-btn w-full aspect-square rounded-lg border-2 border-stone-200"
+        style="background:#f0fdf4"
+        title="Green 50"></button>
+      <button
+        data-lbg="#fef2f2"
+        class="dp-lbg-btn w-full aspect-square rounded-lg border-2 border-stone-200"
+        style="background:#fef2f2"
+        title="Red 50 (blush)"></button>
+      <button
+        data-lbg="#f5f5f4"
+        class="dp-lbg-btn w-full aspect-square rounded-lg border-2 border-stone-200"
+        style="background:#f5f5f4"
+        title="Stone 100"></button>
+    </div>
+  </div>
+
+  <!-- CURRENT VALUES -->
+  <div class="mt-4 pt-4 border-t border-stone-200 dark:border-stone-700">
+    <p class="text-xs text-stone-400 dark:text-stone-500 mb-1">
+      Current config:
+    </p>
+    <pre
+      id="dp-output"
+      class="text-xs bg-stone-100 dark:bg-stone-900 rounded p-2 overflow-x-auto text-stone-600 dark:text-stone-400 whitespace-pre-wrap">
+    </pre>
+  </div>
+</div>
+
+<script>
+  function initDesignPanel() {
+    const panel = document.getElementById("design-panel");
+    const toggle = document.getElementById("design-panel-toggle");
+    if (!panel || !toggle) return;
+
+    // Load all Google Fonts we might need
+    const fontLink = document.createElement("link");
+    fontLink.rel = "stylesheet";
+    fontLink.href =
+      "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@400;600;700&family=Outfit:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,700;1,400&display=swap";
+    document.head.appendChild(fontLink);
+
+    // Toggle panel visibility
+    toggle.addEventListener("click", () => {
+      panel.classList.toggle("hidden");
+    });
+
+    // State
+    const state = JSON.parse(localStorage.getItem("dp-state") || "{}");
+
+    const headingSel = document.getElementById(
+      "dp-heading-font",
+    ) as HTMLSelectElement;
+    const bodySel = document.getElementById(
+      "dp-body-font",
+    ) as HTMLSelectElement;
+    const sizeSl = document.getElementById("dp-font-size") as HTMLInputElement;
+    const sizeLabel = document.getElementById("dp-size-label");
+    const output = document.getElementById("dp-output");
+
+    // Restore state
+    if (state.headingFont) headingSel.value = state.headingFont;
+    if (state.bodyFont) bodySel.value = state.bodyFont;
+    if (state.fontSize) {
+      sizeSl.value = state.fontSize;
+      if (sizeLabel) sizeLabel.textContent = state.fontSize + "px";
+    }
+
+    function apply() {
+      const root = document.documentElement;
+
+      // Fonts
+      root.style.setProperty("--font-serif", headingSel.value);
+      root.style.setProperty("--font-sans", bodySel.value);
+
+      // Font size
+      root.style.fontSize = sizeSl.value + "px";
+      if (sizeLabel) sizeLabel.textContent = sizeSl.value + "px";
+
+      // Save
+      const current: Record<string, string> = {
+        headingFont: headingSel.value,
+        bodyFont: bodySel.value,
+        fontSize: sizeSl.value,
+      };
+      if (state.accent) current.accent = state.accent;
+      if (state.accentHover) current.accentHover = state.accentHover;
+      if (state.darkBg) current.darkBg = state.darkBg;
+      if (state.lightBg) current.lightBg = state.lightBg;
+      localStorage.setItem("dp-state", JSON.stringify(current));
+
+      // Output
+      if (output) {
+        output.textContent = JSON.stringify(current, null, 2);
+      }
+    }
+
+    headingSel.addEventListener("change", apply);
+    bodySel.addEventListener("change", apply);
+    sizeSl.addEventListener("input", apply);
+
+    // Accent color buttons
+    document.querySelectorAll(".dp-color-btn").forEach((btn) => {
+      if (state.accent && btn.getAttribute("data-accent") === state.accent) {
+        btn.classList.add("border-stone-900", "dark:border-stone-100");
+      }
+      btn.addEventListener("click", () => {
+        const accent = btn.getAttribute("data-accent")!;
+        const hover = btn.getAttribute("data-accent-hover")!;
+        document.documentElement.style.setProperty("--color-accent", accent);
+        document.documentElement.style.setProperty(
+          "--color-accent-hover",
+          hover,
+        );
+        state.accent = accent;
+        state.accentHover = hover;
+        // Update selection UI
+        document
+          .querySelectorAll(".dp-color-btn")
+          .forEach((b) =>
+            b.classList.remove("border-stone-900", "dark:border-stone-100"),
+          );
+        btn.classList.add("border-stone-900", "dark:border-stone-100");
+        apply();
+      });
+    });
+
+    // Dark mode bg buttons
+    document.querySelectorAll(".dp-bg-btn").forEach((btn) => {
+      if (state.darkBg && btn.getAttribute("data-bg") === state.darkBg) {
+        btn.classList.add("border-stone-400");
+      }
+      btn.addEventListener("click", () => {
+        const bg = btn.getAttribute("data-bg")!;
+        state.darkBg = bg;
+        // Apply to all dark bg elements — override via CSS custom property
+        document.documentElement.style.setProperty("--dp-dark-bg", bg);
+        document
+          .querySelectorAll(".dp-bg-btn")
+          .forEach((b) => b.classList.remove("border-stone-400"));
+        btn.classList.add("border-stone-400");
+        applyDarkBg(bg);
+        apply();
+      });
+    });
+
+    // Light mode bg buttons
+    document.querySelectorAll(".dp-lbg-btn").forEach((btn) => {
+      if (state.lightBg && btn.getAttribute("data-lbg") === state.lightBg) {
+        btn.classList.add("border-stone-600");
+      }
+      btn.addEventListener("click", () => {
+        const bg = btn.getAttribute("data-lbg")!;
+        state.lightBg = bg;
+        document.documentElement.style.setProperty("--dp-light-bg", bg);
+        document
+          .querySelectorAll(".dp-lbg-btn")
+          .forEach((b) => b.classList.remove("border-stone-600"));
+        btn.classList.add("border-stone-600");
+        applyLightBg(bg);
+        apply();
+      });
+    });
+
+    function applyDarkBg(color: string) {
+      // Use a style tag to override dark mode backgrounds
+      let style = document.getElementById("dp-dark-bg-style");
+      if (!style) {
+        style = document.createElement("style");
+        style.id = "dp-dark-bg-style";
+        document.head.appendChild(style);
+      }
+      style.textContent = `
+      .dark body, .dark header, .dark #mobile-menu { background-color: ${color} !important; }
+      .dark header, .dark #mobile-menu { background-color: color-mix(in srgb, ${color} 80%, transparent) !important; }
+    `;
+    }
+
+    function applyLightBg(color: string) {
+      let style = document.getElementById("dp-light-bg-style");
+      if (!style) {
+        style = document.createElement("style");
+        style.id = "dp-light-bg-style";
+        document.head.appendChild(style);
+      }
+      style.textContent = `
+      :not(.dark) body, :not(.dark) header, :not(.dark) #mobile-menu { background-color: ${color} !important; }
+      :not(.dark) header, :not(.dark) #mobile-menu { background-color: color-mix(in srgb, ${color} 80%, transparent) !important; }
+    `;
+    }
+
+    // Apply saved state on load
+    if (state.accent) {
+      document.documentElement.style.setProperty(
+        "--color-accent",
+        state.accent,
+      );
+      document.documentElement.style.setProperty(
+        "--color-accent-hover",
+        state.accentHover,
+      );
+    }
+    if (state.darkBg) applyDarkBg(state.darkBg);
+    if (state.lightBg) applyLightBg(state.lightBg);
+    apply();
+  }
+
+  initDesignPanel();
+  document.addEventListener("astro:after-swap", initDesignPanel);
+</script>
