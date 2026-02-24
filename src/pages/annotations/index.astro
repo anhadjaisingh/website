@@ -24,7 +24,10 @@ const annotatedArticles = (await getCollection("annotations")).sort(
         <ul class="space-y-8">
           {annotatedArticles.map((article) => (
             <li>
-              <a href={`/annotations/${article.id}`} class="group block">
+              <a
+                href={`/annotations/${article.id.replace(/\/source$/, "")}`}
+                class="group block"
+              >
                 <h2 class="text-xl font-semibold group-hover:text-accent transition-colors">
                   {article.data.title}
                 </h2>

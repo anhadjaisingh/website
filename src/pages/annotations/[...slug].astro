@@ -10,19 +10,23 @@ import type { Annotation } from "../../lib/annotations";
 
 export async function getStaticPaths() {
   const articles = await getCollection("annotations");
-  return articles.map((article) => ({
-    params: { slug: article.id },
-    props: { article },
-  }));
+  return articles.map((article) => {
+    // article.id is like "do-things-that-dont-scale/source", strip the "/source" suffix
+    const slug = article.id.replace(/\/source$/, "");
+    return {
+      params: { slug },
+      props: { article, slug },
+    };
+  });
 }
 
-const { article } = Astro.props;
+const { article, slug } = Astro.props;
 
 // Read the sibling annotations.yaml file
 const annotationsDir = path.join(
   process.cwd(),
   "src/content/annotations",
-  article.id,
+  slug,
 );
 const yamlPath = path.join(annotationsDir, "annotations.yaml");
 
