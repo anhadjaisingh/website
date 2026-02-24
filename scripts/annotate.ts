@@ -30,6 +30,7 @@ async function main() {
   if (!article) {
     console.error("Could not extract readable content from the page.");
     process.exit(1);
+    return; // unreachable, but helps TypeScript narrow the type
   }
 
   // Convert HTML content to markdown

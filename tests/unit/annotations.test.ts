@@ -3,7 +3,6 @@ import {
   findAnchorPosition,
   buildAnnotatedSegments,
   type Annotation,
-  type AnnotatedSegment,
 } from "../../src/lib/annotations";
 
 describe("findAnchorPosition", () => {
