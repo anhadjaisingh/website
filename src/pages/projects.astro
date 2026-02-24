@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.sortOrder - b.data.sortOrder,
+);
+---
+
+<BaseLayout title="Projects">
+  <h1 class="font-serif text-4xl font-bold mb-8">Projects</h1>
+  <div class="grid gap-6 sm:grid-cols-2">
+    {
+      projects.map((project) => (
+        <div class="border border-stone-200 rounded-lg p-6 hover:border-stone-300 transition-colors">
+          <h2 class="text-lg font-semibold mb-1">{project.data.title}</h2>
+          <p class="text-stone-600 text-sm mb-3">{project.data.description}</p>
+          <div class="flex flex-wrap gap-2 mb-3">
+            {project.data.tags.map((tag: string) => (
+              <span class="text-xs bg-stone-100 text-stone-600 px-2 py-0.5 rounded">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div class="flex gap-3 text-sm">
+            {project.data.repoUrl && (
+              <a
+                href={project.data.repoUrl}
+                class="text-accent hover:underline"
+              >
+                Source
+              </a>
+            )}
+            {project.data.demoUrl && (
+              <a
+                href={project.data.demoUrl}
+                class="text-accent hover:underline"
+              >
+                Demo
+              </a>
+            )}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</BaseLayout>
