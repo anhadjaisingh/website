@@ -1,0 +1,12 @@
+---
+title: "A fine fourth!"
+description: "The fourth week of GSoC brings work with adb, Android emulators, mozdevice and telnet."
+date: 2013-07-17
+tags: ["gsoc", "mozilla"]
+---
+
+<p><a href="{{site.url}}/media/bbc-radio-4-logo-big.png"><img class="size-full wp-image" id="i-286" alt="Image" src="{{site.url}}/media/bbc-radio-4-logo-big.png" /></a></p>
+<p>The 4th week of my adventure comes to an end, and I must say it's been thoroughly enjoyable so far. This week's work involved working with adb, avds, mozdevice and telnet!</p>
+<p>I've been writing a few tests for mozdevice, and in the process I've been learning a bit about the tools offered by the android-sdk, namely adb and the android emulator. New tools, systems internals and sockets always intrigue me, and this week had all 3! As always the people at ateam have been very helpful, explaining things with patience worthy of a Monk ;)</p>
+<p>As always there's a bug to keep track of my status and progress, and it's called ...&nbsp;<b><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=894062">Bug&nbsp;894062</a>! </b>Yes, not very inspiring, I know, but that's just how bug names are.</p>
+<p>Week 5 will see me continue work on Mozdevice tests and hopefully, if I can hurry things up a bit, start work on Mozprofile.</p>

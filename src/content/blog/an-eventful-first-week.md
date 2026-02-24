@@ -1,0 +1,30 @@
+---
+title: "'Twas an eventful first week!"
+description: "The first week of my GSoC adventure with Mozilla came to an end, working on mozfile and mozinfo test writing."
+date: 2013-06-26
+tags: ["google summer of code", "gsoc", "mozilla", "python", "vim"]
+---
+
+<p><a href="{{site.url}}/media/one-fixed.jpg"><img class="size-full wp-image" id="i-126" alt="Image" src="{{site.url}}/media/one-fixed.jpg" /></a></p>
+<p>The first week of my adventure came to an end last Sunday, and I must say it was an enjoyable venture.</p>
+<p>Metaphorically I can probably sum up my week with the following quotes:</p>
+<p>&nbsp;</p>
+<blockquote><address>"With mirth and laughter let old wrinkles come."<br />
+-- William Shakespeare</address></blockquote><br />
+<strong>Joy</strong>. Working with the folks in A*Team has been an absolute pleasure. They're fun, clever and they work really hard.</p>
+<p>&nbsp;</p>
+<blockquote><address>"A fool thinks himself to be wise, but a wise man knows himself to be a fool."<br />
+-- William Shakespeare</address></blockquote><br />
+<strong>Python</strong>. Every time I begin to feel that I have obtained a certain degree of proficiency with the language,&nbsp;the great snake returns to remind me that I still have much to learn.</p>
+<p>&nbsp;</p>
+<blockquote><address>"There are more things that vi(m) can do, Horatio, than are dreams in your philosophy."<br />
+-- vi folklore</address></blockquote><br />
+<strong>Vim</strong>. My tryst with this magical editor continues, and with each passing day, I hope to unearth a new secret.</p>
+<p>&nbsp;</p>
+<p>Coming back to the <em>technical</em> side of things, Over the last week I've been working on&nbsp;writing tests for two python modules titled <em>"mozfile"</em> and <em>"mozinfo"</em>.</p>
+<ol>
+<li><em><strong><a href="https://github.com/mozilla/mozbase/tree/master/mozfile" target="_blank">Mozfile</a></strong></em>, is a module that lets one handle simple file operations without worrying about the underlying platform inconsistencies.You can track progress for this on &nbsp;<em><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=885224" target="_blank">Bug 885224</a></em>.</li>
+<li><em><strong><a href="https://github.com/mozilla/mozbase/tree/master/mozinfo" target="_blank">Mozinfo</a></strong></em>, is a module that gives you platform information about the operating system from inside Python in a convenient form.You can track progress for this on <em><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=885145" target="_blank">Bug&nbsp;885145</a></em>.</li><br />
+</ol><br />
+&nbsp;</p>
+<p><strong>Coming up&nbsp;</strong>next are <em><strong><a href="https://github.com/mozilla/mozbase/tree/master/moznetwork" target="_blank">Moznetwork</a></strong></em> and <em><strong><a href="https://github.com/mozilla/mozbase/tree/master/mozinstall" target="_blank">Mozinstall</a></strong></em>, so keep a eye out for updates!</p>
