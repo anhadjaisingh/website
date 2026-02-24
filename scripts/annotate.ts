@@ -27,10 +27,9 @@ async function main() {
   const reader = new Readability(document);
   const article = reader.parse();
 
-  if (!article) {
+  if (!article?.content) {
     console.error("Could not extract readable content from the page.");
     process.exit(1);
-    return; // unreachable, but helps TypeScript narrow the type
   }
 
   // Convert HTML content to markdown
