@@ -2,21 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const links = [
-  {
-    name: "GitHub",
-    url: "https://github.com/ffledgling",
-    handle: "@ffledgling",
-  },
-  {
-    name: "LinkedIn",
-    url: "https://linkedin.com/in/anhadjaisingh",
-    handle: "Anhad Jai Singh",
-  },
-  {
-    name: "X / Twitter",
-    url: "https://x.com/ffledgling",
-    handle: "@ffledgling",
-  },
+  { name: "GitHub", url: "https://github.com/ffledgling" },
+  { name: "LinkedIn", url: "https://linkedin.com/in/anhadjaisingh" },
+  { name: "X / Twitter", url: "https://x.com/ffledgling" },
 ];
 ---
 
@@ -37,33 +25,25 @@ const links = [
     </div>
   </section>
 
-  <!-- Contact & Links -->
+  <!-- Find Me -->
   <section class="mb-12">
     <h2 class="font-serif text-2xl font-bold mb-4">Find Me</h2>
-    <p class="text-stone-700 dark:text-stone-300 mb-4">
-      Reach me at
-      <a href="mailto:ffledgling@gmail.com" class="text-accent hover:underline"
-        >ffledgling@gmail.com</a
-      >.
-    </p>
-    <ul class="space-y-3">
+    <p class="text-stone-600 dark:text-stone-400">
       {
-        links.map((link) => (
-          <li>
+        links.map((link, i) => (
+          <>
             <a
               href={link.url}
-              class="flex items-center justify-between p-3 border border-stone-200 dark:border-stone-700 rounded-lg hover:border-accent/50 transition-colors"
+              class="text-accent hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span class="font-medium">{link.name}</span>
-              <span class="text-stone-500 dark:text-stone-400 text-sm">
-                {link.handle}
-              </span>
+              {link.name}
             </a>
-          </li>
+            {i < links.length - 1 ? <span class="mx-1">&middot;</span> : null}
+          </>
         ))
       }
-    </ul>
+    </p>
   </section>
 </BaseLayout>
