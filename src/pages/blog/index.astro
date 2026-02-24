@@ -6,13 +6,19 @@ import { formatDate } from "../../lib/utils";
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const twoYearsAgo = new Date();
+twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
+
+const recentPosts = posts.filter((post) => post.data.date >= twoYearsAgo);
+const archivePosts = posts.filter((post) => post.data.date < twoYearsAgo);
 ---
 
 <BaseLayout title="Blog">
   <h1 class="font-serif text-4xl font-bold mb-8">Blog</h1>
   <ul class="space-y-8">
     {
-      posts.map((post) => (
+      recentPosts.map((post) => (
         <li>
           <a href={`/blog/${post.id}`} class="group block">
             <h2 class="text-xl font-semibold group-hover:text-accent transition-colors">
@@ -36,4 +42,30 @@ const posts = (await getCollection("blog"))
       ))
     }
   </ul>
+
+  {
+    archivePosts.length > 0 && (
+      <details class="mt-12">
+        <summary class="font-serif text-2xl font-bold cursor-pointer hover:text-accent transition-colors">
+          Archive
+        </summary>
+        <ul class="space-y-6 mt-6">
+          {archivePosts.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}`} class="group block">
+                <h2 class="text-xl font-semibold group-hover:text-accent transition-colors">
+                  {post.data.title}
+                </h2>
+                <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-stone-500 mt-1">
+                  <time datetime={post.data.date.toISOString()}>
+                    {formatDate(post.data.date)}
+                  </time>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </details>
+    )
+  }
 </BaseLayout>
