@@ -1,4 +1,6 @@
 dist/
 node_modules/
 .astro/
+.old-blog/
+test-results/
 package-lock.json

@@ -55,7 +55,7 @@ function MobilePopover({
   return (
     <div className="mt-2 mb-2 p-3 bg-stone-100 dark:bg-stone-800 rounded-lg border border-stone-200 dark:border-stone-700 text-sm xl:hidden">
       <div className="flex justify-between items-start gap-2">
-        <p className="text-stone-700 dark:text-stone-300">{annotation.note}</p>
+        <span className="text-stone-700 dark:text-stone-300">{annotation.note}</span>
         <button
           onClick={onClose}
           className="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 shrink-0"
@@ -121,19 +121,17 @@ function AnnotatedParagraph({
   const segments = buildAnnotatedSegments(paragraphHtml, annotations);
 
   return (
-    <div className="mb-4 relative">
-      <p className="leading-relaxed text-lg">
-        {segments.map((segment, i) =>
-          segment.type === "text" ? (
-            <span key={i}>{segment.content}</span>
-          ) : (
-            <HighlightedText
-              key={i}
-              segment={segment as AnnotatedSegment & { type: "highlight" }}
-            />
-          ),
-        )}
-      </p>
+    <div className="mb-4 relative leading-relaxed text-lg">
+      {segments.map((segment, i) =>
+        segment.type === "text" ? (
+          <span key={i}>{segment.content}</span>
+        ) : (
+          <HighlightedText
+            key={i}
+            segment={segment as AnnotatedSegment & { type: "highlight" }}
+          />
+        ),
+      )}
     </div>
   );
 }
