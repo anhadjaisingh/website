@@ -1,0 +1,35 @@
+---
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/blog", label: "Blog" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" },
+  { href: "/links", label: "Links" },
+  { href: "/contact", label: "Contact" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 bg-stone-50/80 backdrop-blur-sm border-b border-stone-200">
+  <nav class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a href="/" class="font-serif text-xl font-bold text-stone-900 hover:text-accent transition-colors">
+      ffledgling
+    </a>
+    <ul class="flex gap-6 text-sm">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={[
+              "transition-colors hover:text-accent",
+              currentPath === link.href ? "text-accent font-medium" : "text-stone-600",
+            ]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
