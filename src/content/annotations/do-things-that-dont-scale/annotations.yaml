@@ -1,0 +1,25 @@
+annotations:
+  - id: "a1"
+    anchor: "do things that don't scale"
+    type: "margin"
+    note: "This phrase has become startup gospel, but it's worth reading the original argument carefully."
+
+  - id: "a2"
+    anchor: "the founders make them take off"
+    type: "margin"
+    note: "Agency over luck. The best founders I've met all share this belief."
+
+  - id: "a3"
+    anchor: "recruit users manually"
+    type: "inline"
+    note: "This is the core insight of the essay. Every successful startup I know did some version of this — whether it was going door to door, cold emailing, or showing up at conferences. The founders who skip this step usually fail because they never develop the tight feedback loop with real users that manual recruiting creates."
+
+  - id: "a4"
+    anchor: "Collison installation"
+    type: "margin"
+    note: "Legendary move. Don't ask permission, just set it up."
+
+  - id: "a5"
+    anchor: "underestimate the power of compound growth"
+    type: "inline"
+    note: "This math is what makes the 'do things that don't scale' advice work. You only need to manually recruit the first cohort — after that, compound growth takes over. But you have to actually do the manual work first to prime the pump."
