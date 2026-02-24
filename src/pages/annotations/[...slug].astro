@@ -1,0 +1,99 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AnnotatedArticle from "../../components/AnnotatedArticle";
+import { formatDate } from "../../lib/utils";
+import fs from "node:fs";
+import path from "node:path";
+import yaml from "js-yaml";
+import type { Annotation } from "../../lib/annotations";
+
+export async function getStaticPaths() {
+  const articles = await getCollection("annotations");
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+
+// Read the sibling annotations.yaml file
+const annotationsDir = path.join(
+  process.cwd(),
+  "src/content/annotations",
+  article.id,
+);
+const yamlPath = path.join(annotationsDir, "annotations.yaml");
+
+let annotations: Annotation[] = [];
+if (fs.existsSync(yamlPath)) {
+  const yamlContent = fs.readFileSync(yamlPath, "utf-8");
+  const parsed = yaml.load(yamlContent) as {
+    annotations?: Annotation[];
+  } | null;
+  annotations = parsed?.annotations ?? [];
+}
+
+// Read the source markdown body (strip frontmatter)
+const sourcePath = path.join(annotationsDir, "source.md");
+const sourceContent = fs.readFileSync(sourcePath, "utf-8");
+const bodyMatch = sourceContent.match(/^---[\s\S]*?---\s*\n([\s\S]*)$/);
+const sourceBody = bodyMatch ? bodyMatch[1].trim() : sourceContent;
+---
+
+<BaseLayout
+  title={`Annotated: ${article.data.title}`}
+  description={article.data.description}
+>
+  <article class="max-w-prose mx-auto xl:max-w-none xl:px-8">
+    <header class="mb-8 max-w-prose mx-auto">
+      <p
+        class="text-sm text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-2"
+      >
+        Annotated Reading
+      </p>
+      <h1 class="font-serif text-3xl md:text-4xl font-bold mb-3">
+        {article.data.title}
+      </h1>
+      <p class="text-stone-600 dark:text-stone-400 mb-4">
+        by {article.data.author}
+      </p>
+      <div
+        class="text-sm text-stone-500 dark:text-stone-400 flex flex-wrap gap-x-4"
+      >
+        <a
+          href={article.data.sourceUrl}
+          class="text-accent hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Original article ↗
+        </a>
+        <span>
+          Snapshotted{" "}
+          <time datetime={article.data.snapshotDate.toISOString()}>
+            {formatDate(article.data.snapshotDate)}
+          </time>
+        </span>
+      </div>
+      {
+        article.data.tags.length > 0 && (
+          <div class="flex gap-2 mt-3 text-sm">
+            {article.data.tags.map((tag: string) => (
+              <span class="text-accent">#{tag}</span>
+            ))}
+          </div>
+        )
+      }
+    </header>
+
+    <div class="max-w-prose mx-auto">
+      <AnnotatedArticle
+        client:load
+        sourceHtml={sourceBody}
+        annotations={annotations}
+      />
+    </div>
+  </article>
+</BaseLayout>

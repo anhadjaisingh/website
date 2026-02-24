@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { formatDate } from "../../lib/utils";
+
+const annotatedArticles = (await getCollection("annotations")).sort(
+  (a, b) => b.data.snapshotDate.valueOf() - a.data.snapshotDate.valueOf(),
+);
+---
+
+<BaseLayout title="Annotations">
+  <section>
+    <h1 class="font-serif text-4xl font-bold mb-2">Annotated Readings</h1>
+    <p class="text-stone-500 dark:text-stone-400 mb-8 max-w-prose">
+      Articles I've read closely and annotated with my commentary.
+    </p>
+
+    {
+      annotatedArticles.length === 0 ? (
+        <p class="text-stone-500 dark:text-stone-400 italic">
+          No annotated articles yet. Check back soon.
+        </p>
+      ) : (
+        <ul class="space-y-8">
+          {annotatedArticles.map((article) => (
+            <li>
+              <a href={`/annotations/${article.id}`} class="group block">
+                <h2 class="text-xl font-semibold group-hover:text-accent transition-colors">
+                  {article.data.title}
+                </h2>
+                <div class="text-sm text-stone-500 dark:text-stone-400 mt-1">
+                  by {article.data.author} · Annotated{" "}
+                  <time datetime={article.data.snapshotDate.toISOString()}>
+                    {formatDate(article.data.snapshotDate)}
+                  </time>
+                </div>
+                <p class="text-stone-600 dark:text-stone-400 mt-2">
+                  {article.data.description}
+                </p>
+                {article.data.tags.length > 0 && (
+                  <div class="flex gap-2 mt-2 text-sm">
+                    {article.data.tags.map((tag: string) => (
+                      <span class="text-accent">#{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</BaseLayout>
