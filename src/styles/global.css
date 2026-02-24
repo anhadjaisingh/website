@@ -9,3 +9,5 @@
   --color-accent: #2563eb;
   --color-accent-hover: #1d4ed8;
 }
+
+@custom-variant dark (&:where(.dark, .dark *));

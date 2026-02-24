@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from "./ThemeToggle.astro";
+
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/blog", label: "Blog" },
@@ -12,12 +14,12 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header
-  class="sticky top-0 z-50 bg-stone-50/80 backdrop-blur-sm border-b border-stone-200"
+  class="sticky top-0 z-50 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-sm border-b border-stone-200 dark:border-stone-700"
 >
   <nav class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
     <a
       href="/"
-      class="font-serif text-xl font-bold text-stone-900 hover:text-accent transition-colors"
+      class="font-serif text-xl font-bold text-stone-900 dark:text-stone-100 hover:text-accent dark:hover:text-accent transition-colors"
     >
       ffledgling
     </a>
@@ -31,7 +33,7 @@ const currentPath = Astro.url.pathname;
                 "transition-colors hover:text-accent",
                 currentPath === link.href
                   ? "text-accent font-medium"
-                  : "text-stone-600",
+                  : "text-stone-600 dark:text-stone-400",
               ]}
             >
               {link.label}
@@ -40,5 +42,6 @@ const currentPath = Astro.url.pathname;
         ))
       }
     </ul>
+    <ThemeToggle />
   </nav>
 </header>
