@@ -16,18 +16,23 @@ const { title, description, date, tags } = Astro.props;
   <article class="max-w-prose mx-auto">
     <header class="mb-8">
       <h1 class="font-serif text-4xl font-bold mb-3">{title}</h1>
-      <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-stone-500">
-        <time datetime={date.toISOString()}>{formatDate(date)}</time>
-        {
-          tags.length > 0 && (
-            <div class="flex gap-2">
-              {tags.map((tag) => (
-                <span class="text-accent">#{tag}</span>
-              ))}
-            </div>
-          )
-        }
-      </div>
+      <time datetime={date.toISOString()} class="text-sm text-stone-500"
+        >{formatDate(date)}</time
+      >
+      {
+        tags.length > 0 && (
+          <div class="flex flex-wrap items-center gap-2 mt-2">
+            <span class="text-stone-400 dark:text-stone-500 text-sm">
+              tags:
+            </span>
+            {tags.map((tag) => (
+              <span class="px-2 py-0.5 text-xs rounded-full border border-stone-300 dark:border-stone-600 text-stone-600 dark:text-stone-400">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )
+      }
     </header>
     <div class="prose prose-stone prose-lg dark:prose-invert max-w-none">
       <slot />
