@@ -15,9 +15,9 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header
-  class="sticky top-0 z-50 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-sm border-b border-stone-200 dark:border-stone-700"
+  class="sticky top-0 z-50 bg-slate-50/80 dark:bg-[#0d1520]/85 backdrop-blur-sm border-b border-stone-200 dark:border-stone-700"
 >
-  <nav class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+  <nav class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
     <a
       href="/"
       class="font-serif text-xl font-bold text-stone-900 dark:text-stone-100 hover:text-accent dark:hover:text-accent transition-colors"
@@ -97,9 +97,9 @@ const currentPath = Astro.url.pathname;
   <!-- Mobile dropdown menu -->
   <div
     id="mobile-menu"
-    class="hidden md:hidden border-t border-stone-200 dark:border-stone-700 bg-stone-50/95 dark:bg-stone-900/95 backdrop-blur-sm"
+    class="hidden md:hidden border-t border-stone-200 dark:border-stone-700 bg-slate-50/95 dark:bg-[#0d1520]/95 backdrop-blur-sm"
   >
-    <ul class="max-w-4xl mx-auto px-4 py-3 flex flex-col gap-3 text-sm">
+    <ul class="max-w-3xl mx-auto px-4 py-3 flex flex-col gap-3 text-sm">
       {
         navLinks.map((link) => (
           <li>

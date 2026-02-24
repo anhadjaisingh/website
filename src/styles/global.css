@@ -1,14 +1,14 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap");
 
 @theme {
-  --font-sans: "Inter", sans-serif;
-  --font-serif: "Playfair Display", serif;
+  --font-sans: "Literata", serif;
+  --font-serif: "Literata", serif;
   --font-mono: "JetBrains Mono", monospace;
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
+  --color-accent: #dc143c;
+  --color-accent-hover: #b91030;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
