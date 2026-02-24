@@ -6,7 +6,7 @@ What happens when you point an AI coding assistant at its own usage logs and say
 
 I'd been using Claude Code heavily for a few days, building a developer tool called [clauson](https://github.com/anhadg/clauson) — a CLI for analyzing Claude Code's JSONL session logs. After wrapping up a particularly long session, I checked my API bill: **$197 for a single session. 186 million tokens.**
 
-That's... a lot. But I had no intuition for *where* those tokens went. Was it the 356 bash commands? The 171 file reads? The 65 subagent tasks? I had the raw logs, and I had a tool purpose-built for querying them. So I did the obvious thing: I opened a new Claude Code session and told it to investigate.
+That's... a lot. But I had no intuition for _where_ those tokens went. Was it the 356 bash commands? The 171 file reads? The 65 subagent tasks? I had the raw logs, and I had a tool purpose-built for querying them. So I did the obvious thing: I opened a new Claude Code session and told it to investigate.
 
 > "I'm dropping you into the claude project history folder. I have a tool called clauson, which can be used to query and debug these jsonl files. Can you help me figure out for session f1cf0635 — what used the most amount of tokens? And what is a bad pattern that makes this happen?"
 
@@ -104,17 +104,17 @@ The formula is simple: **cost = (number of tool calls) x (context size) x (price
 
 Here's the pricing breakdown for the session, running on Claude Opus 4.6:
 
-| Token Type | Price per MTok | Tokens | Cost |
-|---|---|---|---|
-| Input (uncached) | $5.00 | 5,401 | $0.03 |
-| Cache Write | $10.00 | 10,642,588 | $106.43 |
-| Cache Read | $0.50 | 175,449,377 | $87.72 |
-| Output | $25.00 | 120,669 | $3.02 |
-| **Total** | | **186,218,035** | **~$197.20** |
+| Token Type       | Price per MTok | Tokens          | Cost         |
+| ---------------- | -------------- | --------------- | ------------ |
+| Input (uncached) | $5.00          | 5,401           | $0.03        |
+| Cache Write      | $10.00         | 10,642,588      | $106.43      |
+| Cache Read       | $0.50          | 175,449,377     | $87.72       |
+| Output           | $25.00         | 120,669         | $3.02        |
+| **Total**        |                | **186,218,035** | **~$197.20** |
 
 Cache reads are 10x cheaper than regular input ($0.50 vs $5.00/MTok), but when you accumulate 175 million of them, even the discount rate adds up to $87. Cache writes — every new tool result and assistant message being written to cache — cost $106, making them the single largest line item.
 
-The output tokens — Claude's actual *thinking* and *writing* — cost only $3.02. The real cost is in the plumbing.
+The output tokens — Claude's actual _thinking_ and _writing_ — cost only $3.02. The real cost is in the plumbing.
 
 ## The Recommendations
 
@@ -132,20 +132,20 @@ Claude proposed six fixes with estimated savings:
 
 **6. Reduce bash error rate.** Better CLAUDE.md instructions, combined scripts instead of individual commands — each prevented error saves two roundtrips at full context cost.
 
-| Fix | Estimated Savings |
-|-----|-------------------|
-| Checkpoint big tasks | ~$20-30 |
-| CI polling in subagents | ~$10-15 |
-| Batch edits / use subagents | ~$5-10 |
-| Lean session continuations | ~$10-15 |
-| Proactive `/compact` | ~$10-20 |
-| **Total potential** | **~$55-90 of the $197** |
+| Fix                         | Estimated Savings       |
+| --------------------------- | ----------------------- |
+| Checkpoint big tasks        | ~$20-30                 |
+| CI polling in subagents     | ~$10-15                 |
+| Batch edits / use subagents | ~$5-10                  |
+| Lean session continuations  | ~$10-15                 |
+| Proactive `/compact`        | ~$10-20                 |
+| **Total potential**         | **~$55-90 of the $197** |
 
 The single biggest lever: **fewer tool calls per turn in a large context.** Whether through smaller turns, subagents, or compacting, the math is the same.
 
 ## The Meta Bit
 
-There's something genuinely novel about this workflow. Claude Code — an AI coding assistant — used a tool built *for* analyzing its own session logs to investigate *its own* token usage and produce a cost optimization report about *itself*.
+There's something genuinely novel about this workflow. Claude Code — an AI coding assistant — used a tool built _for_ analyzing its own session logs to investigate _its own_ token usage and produce a cost optimization report about _itself_.
 
 It found bugs in the analysis tool along the way (the JSON output for per-block token breakdowns returned all zeros; file path parsing broke with shell variables). It suggested features (a `--sort-by` flag, per-block cost attribution, a built-in cost estimator). It even identified when it was hitting clauson limitations and worked around them by piping text output through Python instead.
 
