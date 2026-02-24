@@ -14,7 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "test:all": "vitest run && playwright test"
+    "test:all": "vitest run && playwright test",
+    "annotate": "tsx scripts/annotate.ts"
   },
   "lint-staged": {
     "*.{js,ts,mjs,astro}": [
@@ -27,13 +28,16 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
+    "@mozilla/readability": "^0.6.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.0.0",
     "js-yaml": "^4.1.1",
+    "linkedom": "^0.18.12",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "tailwindcss": "^4.2.1"
+    "tailwindcss": "^4.2.1",
+    "turndown": "^7.2.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
@@ -41,6 +45,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@types/turndown": "^5.0.6",
     "@typescript-eslint/parser": "^8.56.1",
     "eslint": "^9.39.3",
     "eslint-plugin-astro": "^1.6.0",
@@ -48,6 +53,7 @@
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
+    "tsx": "^4.21.0",
     "vitest": "^3.2.4"
   }
 }
