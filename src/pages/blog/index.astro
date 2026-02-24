@@ -16,10 +16,10 @@ const archivePosts = posts.filter((post) => post.data.date < twoYearsAgo);
 
 <BaseLayout title="Blog">
   <h1 class="font-serif text-4xl font-bold mb-8">Blog</h1>
-  <ul class="space-y-8">
+  <ul class="divide-y divide-stone-200 dark:divide-stone-700">
     {
       recentPosts.map((post) => (
-        <li>
+        <li class="py-6 first:pt-0">
           <a href={`/blog/${post.id}`} class="group block">
             <h2 class="text-xl font-semibold group-hover:text-accent transition-colors">
               {post.data.title}
@@ -38,7 +38,9 @@ const archivePosts = posts.filter((post) => post.data.date < twoYearsAgo);
                 </div>
               )}
             </div>
-            <p class="text-stone-600 mt-2">{post.data.description}</p>
+            <p class="text-stone-600 dark:text-stone-400 mt-2">
+              {post.data.description}
+            </p>
           </a>
         </li>
       ))
@@ -47,13 +49,19 @@ const archivePosts = posts.filter((post) => post.data.date < twoYearsAgo);
 
   {
     archivePosts.length > 0 && (
-      <details class="mt-12">
-        <summary class="font-serif text-2xl font-bold cursor-pointer hover:text-accent transition-colors">
-          Archive
+      <details class="mt-12 border-t border-stone-200 dark:border-stone-700 pt-6">
+        <summary class="cursor-pointer select-none group">
+          <span class="font-serif text-2xl font-bold group-hover:text-accent transition-colors">
+            Archive
+          </span>
+          <span class="ml-2 text-sm text-stone-400 dark:text-stone-500">
+            {archivePosts.length} older{" "}
+            {archivePosts.length === 1 ? "post" : "posts"} — click to expand
+          </span>
         </summary>
-        <ul class="space-y-6 mt-6">
+        <ul class="mt-6 divide-y divide-stone-200 dark:divide-stone-700">
           {archivePosts.map((post) => (
-            <li>
+            <li class="py-6 first:pt-0">
               <a href={`/blog/${post.id}`} class="group block">
                 <h2 class="text-xl font-semibold group-hover:text-accent transition-colors">
                   {post.data.title}
@@ -62,7 +70,19 @@ const archivePosts = posts.filter((post) => post.data.date < twoYearsAgo);
                   <time datetime={post.data.date.toISOString()}>
                     {formatDate(post.data.date)}
                   </time>
+                  {post.data.tags.length > 0 && (
+                    <div class="flex gap-2">
+                      {post.data.tags.map((tag: string) => (
+                        <span class="px-2 py-0.5 text-xs rounded-full border border-stone-300 dark:border-stone-600 text-stone-600 dark:text-stone-400">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
+                <p class="text-stone-600 dark:text-stone-400 mt-2">
+                  {post.data.description}
+                </p>
               </a>
             </li>
           ))}

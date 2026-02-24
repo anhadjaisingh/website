@@ -4,10 +4,10 @@ Canonical source of truth for design decisions. Update this when decisions chang
 
 ## Typography
 
-- **Heading font:** Literata (serif) — used for h1-h6, site wordmark ("ffledgling")
+- **Heading/serif font:** DM Serif Display (serif) — used for h1-h6, site wordmark ("ffledgling"), inline emphasis (names)
 - **Body/nav font:** Noto Sans (sans-serif) — used for body text, nav links, footer, UI elements
 - **Code font:** JetBrains Mono (monospace)
-- **Base font size:** 20px (set on `html` element)
+- **Base font size:** 18px (set on `html` element)
 
 ## Colors
 
@@ -30,16 +30,20 @@ Canonical source of truth for design decisions. Update this when decisions chang
 ## Homepage
 
 - **Bio:** Single paragraph intro, no email address on site
-- **Find Me:** Inline links (GitHub, LinkedIn, X/Twitter) separated by middots
+- **Name styling:** "Anhad" and "ffledgling" in font-serif font-extrabold
+- **Social links:** Centered row with SVG icons (GitHub, LinkedIn, Threads), text-sm, positioned near footer with mt-auto pt-16
 
 ## Footer
 
-- Copyright + "Built with Astro, Cloudflare Pages & Claude Code. Source."
+- Three-column layout: "Website Source" (accent link) | "Built with" Astro/Cloudflare/Claude icons | Copyright
+- Thin padding (py-3), text-sm
 
 ## Blog Posts
 
 - **Prose styling:** prose-stone prose-lg with dark:prose-invert
 - **Layout:** max-w-prose centered
+- **Tags:** pill/chip style with borders, "tags:" prefix, no hashtags
+- **Archive:** Posts older than 2 years collapsed under `<details>` element
 
 ## Process Rules
 
