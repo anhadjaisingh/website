@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import LayoutDemos from "../components/LayoutDemos.tsx";
+import type {
+  BlogPost,
+  Project,
+  AnnotationEntry,
+} from "../components/LayoutDemos.tsx";
+
+// Fetch blog posts, sorted newest first, take first 6
+const rawPosts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 6);
+
+const posts: BlogPost[] = rawPosts.map((p) => ({
+  id: p.id,
+  title: p.data.title,
+  description: p.data.description,
+  date: p.data.date.toISOString(),
+  tags: p.data.tags,
+}));
+
+// Fetch projects
+const rawProjects = (await getCollection("projects")).sort(
+  (a, b) => a.data.sortOrder - b.data.sortOrder,
+);
+
+const projects: Project[] = rawProjects.map((p) => ({
+  id: p.id,
+  title: p.data.title,
+  description: p.data.description,
+  tags: p.data.tags,
+  repoUrl: p.data.repoUrl,
+  demoUrl: p.data.demoUrl,
+}));
+
+// Fetch annotations
+const rawAnnotations = await getCollection("annotations");
+
+const annotations: AnnotationEntry[] = rawAnnotations.map((a) => ({
+  id: a.id,
+  title: a.data.title,
+  author: a.data.author,
+  description: a.data.description,
+}));
+---
+
+<BaseLayout title="Layout Demos">
+  <LayoutDemos
+    client:load
+    posts={posts}
+    projects={projects}
+    annotations={annotations}
+  />
+</BaseLayout>
