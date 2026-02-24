@@ -26,14 +26,21 @@
     ]
   },
   "dependencies": {
+    "@astrojs/react": "^4.4.2",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.0.0",
+    "js-yaml": "^4.1.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
     "@playwright/test": "^1.58.2",
+    "@types/js-yaml": "^4.0.9",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "@typescript-eslint/parser": "^8.56.1",
     "eslint": "^9.39.3",
     "eslint-plugin-astro": "^1.6.0",
