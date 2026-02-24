@@ -2,3 +2,7 @@ node_modules/
 dist/
 .astro/
 .playwright-mcp/
+.claude/
+.old-blog/
+test-results/
+*.png
