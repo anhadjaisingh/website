@@ -14,11 +14,18 @@
   id="design-panel"
   class="fixed bottom-20 right-4 z-[998] w-80 max-h-[80vh] overflow-y-auto rounded-xl shadow-2xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 p-5 hidden"
 >
-  <h3
-    class="font-bold text-sm uppercase tracking-wide text-stone-500 dark:text-stone-400 mb-4"
-  >
-    Design Settings
-  </h3>
+  <div class="flex items-center justify-between mb-4">
+    <h3
+      class="font-bold text-sm uppercase tracking-wide text-stone-500 dark:text-stone-400"
+    >
+      Design Settings
+    </h3>
+    <button
+      id="dp-reset"
+      class="text-xs text-stone-400 hover:text-stone-600 dark:hover:text-stone-300 underline"
+      >Reset</button
+    >
+  </div>
 
   <!-- HEADING FONT -->
   <div class="mb-5">
@@ -30,16 +37,28 @@
       id="dp-heading-font"
       class="w-full text-sm rounded-lg border border-stone-300 dark:border-stone-600 bg-stone-50 dark:bg-stone-700 text-stone-900 dark:text-stone-100 px-3 py-2"
     >
-      <option value="'Playfair Display', serif"
-        >Playfair Display (current)</option
-      >
-      <option value="'Lora', serif">Lora</option>
-      <option value="'Libre Baskerville', serif">Libre Baskerville</option>
-      <option value="'Source Serif 4', serif">Source Serif 4</option>
-      <option value="'Inter', sans-serif">Inter (sans)</option>
-      <option value="'DM Sans', sans-serif">DM Sans (sans)</option>
-      <option value="'Outfit', sans-serif">Outfit (sans)</option>
-      <option value="'Sora', sans-serif">Sora (sans)</option>
+      <optgroup label="Serif">
+        <option value="'Playfair Display', serif"
+          >Playfair Display (current)</option
+        >
+        <option value="'Lora', serif">Lora</option>
+        <option value="'Libre Baskerville', serif">Libre Baskerville</option>
+        <option value="'Source Serif 4', serif">Source Serif 4</option>
+        <option value="'Crimson Pro', serif">Crimson Pro</option>
+        <option value="'Merriweather', serif">Merriweather</option>
+        <option value="'EB Garamond', serif">EB Garamond</option>
+        <option value="'Cormorant Garamond', serif">Cormorant Garamond</option>
+      </optgroup>
+      <optgroup label="Sans-Serif">
+        <option value="'Inter', sans-serif">Inter</option>
+        <option value="'DM Sans', sans-serif">DM Sans</option>
+        <option value="'Outfit', sans-serif">Outfit</option>
+        <option value="'Sora', sans-serif">Sora</option>
+        <option value="'Source Sans 3', sans-serif">Source Sans 3</option>
+        <option value="'IBM Plex Sans', sans-serif">IBM Plex Sans</option>
+        <option value="'Literata', serif">Literata (editorial)</option>
+        <option value="'Newsreader', serif">Newsreader</option>
+      </optgroup>
     </select>
   </div>
 
@@ -53,14 +72,30 @@
       id="dp-body-font"
       class="w-full text-sm rounded-lg border border-stone-300 dark:border-stone-600 bg-stone-50 dark:bg-stone-700 text-stone-900 dark:text-stone-100 px-3 py-2"
     >
-      <option value="'Inter', sans-serif">Inter (current)</option>
-      <option value="'Source Sans 3', sans-serif">Source Sans 3</option>
-      <option value="'DM Sans', sans-serif">DM Sans</option>
-      <option value="'Outfit', sans-serif">Outfit</option>
-      <option value="'Sora', sans-serif">Sora</option>
-      <option value="'Nunito Sans', sans-serif">Nunito Sans</option>
-      <option value="'IBM Plex Sans', sans-serif">IBM Plex Sans</option>
-      <option value="system-ui, sans-serif">System UI</option>
+      <optgroup label="Sans-Serif">
+        <option value="'Inter', sans-serif">Inter (current)</option>
+        <option value="'Source Sans 3', sans-serif">Source Sans 3</option>
+        <option value="'DM Sans', sans-serif">DM Sans</option>
+        <option value="'Outfit', sans-serif">Outfit</option>
+        <option value="'Sora', sans-serif">Sora</option>
+        <option value="'Nunito Sans', sans-serif">Nunito Sans</option>
+        <option value="'IBM Plex Sans', sans-serif">IBM Plex Sans</option>
+        <option value="'Karla', sans-serif">Karla</option>
+        <option value="system-ui, sans-serif">System UI</option>
+      </optgroup>
+      <optgroup label="Serif (high readability)">
+        <option value="'Lora', serif">Lora</option>
+        <option value="'Source Serif 4', serif">Source Serif 4</option>
+        <option value="'Literata', serif">Literata</option>
+        <option value="'Newsreader', serif">Newsreader</option>
+        <option value="'Crimson Pro', serif">Crimson Pro</option>
+        <option value="'Merriweather', serif">Merriweather</option>
+        <option value="'EB Garamond', serif">EB Garamond</option>
+        <option value="'Libre Baskerville', serif">Libre Baskerville</option>
+        <option value="'Cormorant Garamond', serif">Cormorant Garamond</option>
+        <option value="'Spectral', serif">Spectral</option>
+        <option value="Georgia, serif">Georgia (system)</option>
+      </optgroup>
     </select>
   </div>
 
@@ -84,16 +119,20 @@
   <!-- ACCENT COLOR -->
   <div class="mb-5">
     <label
-      class="block text-xs font-medium text-stone-600 dark:text-stone-300 mb-2"
+      class="block text-xs font-medium text-stone-600 dark:text-stone-300 mb-1"
       >Accent Color</label
     >
-    <div id="dp-accent-colors" class="grid grid-cols-4 gap-2">
+    <p class="text-[10px] text-stone-400 dark:text-stone-500 mb-2">
+      Row 1: saturated · Row 2: muted · Row 3: specific
+    </p>
+    <div id="dp-accent-colors" class="grid grid-cols-5 gap-2">
+      <!-- Row 1: Saturated -->
       <button
         data-accent="#2563eb"
         data-accent-hover="#1d4ed8"
         class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
         style="background:#2563eb"
-        title="Blue (current)"></button>
+        title="Blue"></button>
       <button
         data-accent="#d97706"
         data-accent-hover="#b45309"
@@ -113,39 +152,87 @@
         style="background:#e11d48"
         title="Rose"></button>
       <button
-        data-accent="#16a34a"
-        data-accent-hover="#15803d"
-        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
-        style="background:#16a34a"
-        title="Green"></button>
-      <button
         data-accent="#7c3aed"
         data-accent-hover="#6d28d9"
         class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
         style="background:#7c3aed"
         title="Violet"></button>
+      <!-- Row 2: Muted / desaturated -->
       <button
-        data-accent="#ea580c"
-        data-accent-hover="#c2410c"
+        data-accent="#6b7fa6"
+        data-accent-hover="#586d91"
         class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
-        style="background:#ea580c"
-        title="Orange"></button>
+        style="background:#6b7fa6"
+        title="Muted blue"></button>
       <button
-        data-accent="#64748b"
-        data-accent-hover="#475569"
+        data-accent="#a38b5e"
+        data-accent-hover="#8c774f"
         class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
-        style="background:#64748b"
-        title="Slate"></button>
+        style="background:#a38b5e"
+        title="Muted gold"></button>
+      <button
+        data-accent="#6b9e96"
+        data-accent-hover="#5a8a82"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#6b9e96"
+        title="Muted teal"></button>
+      <button
+        data-accent="#a6726a"
+        data-accent-hover="#8f5f58"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#a6726a"
+        title="Muted rose"></button>
+      <button
+        data-accent="#8b7ea6"
+        data-accent-hover="#766d91"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#8b7ea6"
+        title="Muted violet"></button>
+      <!-- Row 3: Specific requests -->
+      <button
+        data-accent="#dc143c"
+        data-accent-hover="#b91030"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#dc143c"
+        title="Crimson"></button>
+      <button
+        data-accent="#c5a023"
+        data-accent-hover="#a8891e"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#c5a023"
+        title="Gold"></button>
+      <button
+        data-accent="#1e3a5f"
+        data-accent-hover="#162d4a"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#1e3a5f"
+        title="Royal/ink blue"></button>
+      <button
+        data-accent="#1a4d2e"
+        data-accent-hover="#133b22"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#1a4d2e"
+        title="Racing green"></button>
+      <button
+        data-accent="#d4c5a0"
+        data-accent-hover="#bfb08a"
+        class="dp-color-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#d4c5a0"
+        title="Cream"></button>
     </div>
   </div>
 
   <!-- DARK MODE BG -->
   <div class="mb-5">
     <label
-      class="block text-xs font-medium text-stone-600 dark:text-stone-300 mb-2"
+      class="block text-xs font-medium text-stone-600 dark:text-stone-300 mb-1"
       >Dark Mode Background</label
     >
+    <p class="text-[10px] text-stone-400 dark:text-stone-500 mb-2">
+      Hover for names
+    </p>
     <div id="dp-dark-bgs" class="grid grid-cols-4 gap-2">
+      <!-- Neutrals -->
       <button
         data-bg="#1c1917"
         class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
@@ -162,30 +249,73 @@
         style="background:#000000"
         title="Pure black"></button>
       <button
-        data-bg="#0f172a"
-        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
-        style="background:#0f172a"
-        title="Slate 900 (navy)"></button>
-      <button
-        data-bg="#18181b"
-        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
-        style="background:#18181b"
-        title="Zinc 900 (cool grey)"></button>
-      <button
         data-bg="#171717"
         class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
         style="background:#171717"
         title="Neutral 900"></button>
+      <!-- Purples -->
       <button
         data-bg="#1a1a2e"
         class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
         style="background:#1a1a2e"
         title="Deep indigo"></button>
       <button
+        data-bg="#1e1528"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#1e1528"
+        title="Dark plum"></button>
+      <button
+        data-bg="#16132b"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#16132b"
+        title="Midnight violet"></button>
+      <button
+        data-bg="#211a2e"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#211a2e"
+        title="Eggplant"></button>
+      <!-- Reds / warm -->
+      <button
+        data-bg="#1f1315"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#1f1315"
+        title="Dark wine"></button>
+      <button
+        data-bg="#231517"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#231517"
+        title="Deep burgundy"></button>
+      <button
         data-bg="#1a1412"
         class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
         style="background:#1a1412"
         title="Warm espresso"></button>
+      <button
+        data-bg="#201714"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#201714"
+        title="Dark chocolate"></button>
+      <!-- Greens / blues -->
+      <button
+        data-bg="#0f1a16"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#0f1a16"
+        title="Dark forest"></button>
+      <button
+        data-bg="#111a15"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#111a15"
+        title="Deep evergreen"></button>
+      <button
+        data-bg="#0f172a"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#0f172a"
+        title="Slate 900 (navy)"></button>
+      <button
+        data-bg="#0d1520"
+        class="dp-bg-btn w-full aspect-square rounded-lg border-2 border-transparent"
+        style="background:#0d1520"
+        title="Ink blue"></button>
     </div>
   </div>
 
@@ -222,15 +352,15 @@
         style="background:#fffbeb"
         title="Amber 50 (warm)"></button>
       <button
-        data-lbg="#f0fdf4"
+        data-lbg="#fefce8"
         class="dp-lbg-btn w-full aspect-square rounded-lg border-2 border-stone-200"
-        style="background:#f0fdf4"
-        title="Green 50"></button>
+        style="background:#fefce8"
+        title="Yellow 50 (cream)"></button>
       <button
-        data-lbg="#fef2f2"
+        data-lbg="#f5f5f0"
         class="dp-lbg-btn w-full aspect-square rounded-lg border-2 border-stone-200"
-        style="background:#fef2f2"
-        title="Red 50 (blush)"></button>
+        style="background:#f5f5f0"
+        title="Warm parchment"></button>
       <button
         data-lbg="#f5f5f4"
         class="dp-lbg-btn w-full aspect-square rounded-lg border-2 border-stone-200"
@@ -255,22 +385,30 @@
   function initDesignPanel() {
     const panel = document.getElementById("design-panel");
     const toggle = document.getElementById("design-panel-toggle");
+    const resetBtn = document.getElementById("dp-reset");
     if (!panel || !toggle) return;
 
-    // Load all Google Fonts we might need
-    const fontLink = document.createElement("link");
-    fontLink.rel = "stylesheet";
-    fontLink.href =
-      "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@400;600;700&family=Outfit:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,700;1,400&display=swap";
-    document.head.appendChild(fontLink);
+    // Prevent duplicate listeners on re-init
+    const freshToggle = toggle.cloneNode(true) as HTMLElement;
+    toggle.parentNode?.replaceChild(freshToggle, toggle);
+    freshToggle.addEventListener("click", () =>
+      panel.classList.toggle("hidden"),
+    );
 
-    // Toggle panel visibility
-    toggle.addEventListener("click", () => {
-      panel.classList.toggle("hidden");
-    });
+    // Load all Google Fonts
+    if (!document.getElementById("dp-fonts-link")) {
+      const fontLink = document.createElement("link");
+      fontLink.rel = "stylesheet";
+      fontLink.id = "dp-fonts-link";
+      fontLink.href =
+        "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=Karla:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Literata:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Newsreader:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@400;600;700&family=Outfit:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,400;0,700;1,400&display=swap";
+      document.head.appendChild(fontLink);
+    }
 
     // State
-    const state = JSON.parse(localStorage.getItem("dp-state") || "{}");
+    let state: Record<string, string> = JSON.parse(
+      localStorage.getItem("dp-state") || "{}",
+    );
 
     const headingSel = document.getElementById(
       "dp-heading-font",
@@ -290,7 +428,7 @@
       if (sizeLabel) sizeLabel.textContent = state.fontSize + "px";
     }
 
-    function apply() {
+    function applyAll() {
       const root = document.documentElement;
 
       // Fonts
@@ -301,117 +439,167 @@
       root.style.fontSize = sizeSl.value + "px";
       if (sizeLabel) sizeLabel.textContent = sizeSl.value + "px";
 
-      // Save
-      const current: Record<string, string> = {
-        headingFont: headingSel.value,
-        bodyFont: bodySel.value,
-        fontSize: sizeSl.value,
-      };
-      if (state.accent) current.accent = state.accent;
-      if (state.accentHover) current.accentHover = state.accentHover;
-      if (state.darkBg) current.darkBg = state.darkBg;
-      if (state.lightBg) current.lightBg = state.lightBg;
-      localStorage.setItem("dp-state", JSON.stringify(current));
+      // Save full state
+      state.headingFont = headingSel.value;
+      state.bodyFont = bodySel.value;
+      state.fontSize = sizeSl.value;
+      localStorage.setItem("dp-state", JSON.stringify(state));
 
       // Output
-      if (output) {
-        output.textContent = JSON.stringify(current, null, 2);
-      }
+      if (output) output.textContent = JSON.stringify(state, null, 2);
     }
 
-    headingSel.addEventListener("change", apply);
-    bodySel.addEventListener("change", apply);
-    sizeSl.addEventListener("input", apply);
+    headingSel.addEventListener("change", applyAll);
+    bodySel.addEventListener("change", applyAll);
+    sizeSl.addEventListener("input", applyAll);
 
     // Accent color buttons
-    document.querySelectorAll(".dp-color-btn").forEach((btn) => {
-      if (state.accent && btn.getAttribute("data-accent") === state.accent) {
-        btn.classList.add("border-stone-900", "dark:border-stone-100");
-      }
-      btn.addEventListener("click", () => {
-        const accent = btn.getAttribute("data-accent")!;
-        const hover = btn.getAttribute("data-accent-hover")!;
-        document.documentElement.style.setProperty("--color-accent", accent);
-        document.documentElement.style.setProperty(
-          "--color-accent-hover",
-          hover,
-        );
-        state.accent = accent;
-        state.accentHover = hover;
-        // Update selection UI
-        document
-          .querySelectorAll(".dp-color-btn")
-          .forEach((b) =>
-            b.classList.remove("border-stone-900", "dark:border-stone-100"),
+    function initAccentBtns() {
+      document.querySelectorAll(".dp-color-btn").forEach((btn) => {
+        if (state.accent && btn.getAttribute("data-accent") === state.accent) {
+          btn.classList.add("ring-2", "ring-offset-1", "ring-stone-100");
+        }
+        btn.addEventListener("click", () => {
+          const accent = btn.getAttribute("data-accent")!;
+          const hover = btn.getAttribute("data-accent-hover")!;
+          document.documentElement.style.setProperty("--color-accent", accent);
+          document.documentElement.style.setProperty(
+            "--color-accent-hover",
+            hover,
           );
-        btn.classList.add("border-stone-900", "dark:border-stone-100");
-        apply();
+          state.accent = accent;
+          state.accentHover = hover;
+          document
+            .querySelectorAll(".dp-color-btn")
+            .forEach((b) =>
+              b.classList.remove("ring-2", "ring-offset-1", "ring-stone-100"),
+            );
+          btn.classList.add("ring-2", "ring-offset-1", "ring-stone-100");
+          applyAll();
+        });
       });
-    });
+    }
 
-    // Dark mode bg buttons
-    document.querySelectorAll(".dp-bg-btn").forEach((btn) => {
-      if (state.darkBg && btn.getAttribute("data-bg") === state.darkBg) {
-        btn.classList.add("border-stone-400");
-      }
-      btn.addEventListener("click", () => {
-        const bg = btn.getAttribute("data-bg")!;
-        state.darkBg = bg;
-        // Apply to all dark bg elements — override via CSS custom property
-        document.documentElement.style.setProperty("--dp-dark-bg", bg);
-        document
-          .querySelectorAll(".dp-bg-btn")
-          .forEach((b) => b.classList.remove("border-stone-400"));
-        btn.classList.add("border-stone-400");
-        applyDarkBg(bg);
-        apply();
-      });
-    });
-
-    // Light mode bg buttons
-    document.querySelectorAll(".dp-lbg-btn").forEach((btn) => {
-      if (state.lightBg && btn.getAttribute("data-lbg") === state.lightBg) {
-        btn.classList.add("border-stone-600");
-      }
-      btn.addEventListener("click", () => {
-        const bg = btn.getAttribute("data-lbg")!;
-        state.lightBg = bg;
-        document.documentElement.style.setProperty("--dp-light-bg", bg);
-        document
-          .querySelectorAll(".dp-lbg-btn")
-          .forEach((b) => b.classList.remove("border-stone-600"));
-        btn.classList.add("border-stone-600");
-        applyLightBg(bg);
-        apply();
-      });
-    });
+    // Background override approach: use CSS custom properties on :root
+    // and a single <style> tag that references them, avoiding the .dark selector race condition
+    function ensureBgStyle() {
+      if (document.getElementById("dp-bg-overrides")) return;
+      const style = document.createElement("style");
+      style.id = "dp-bg-overrides";
+      style.textContent = `
+      html[data-dp-dark-bg].dark body { background-color: var(--dp-dark-bg) !important; }
+      html[data-dp-dark-bg].dark header { background-color: color-mix(in srgb, var(--dp-dark-bg) 85%, transparent) !important; }
+      html[data-dp-dark-bg].dark #mobile-menu { background-color: color-mix(in srgb, var(--dp-dark-bg) 95%, transparent) !important; }
+      html[data-dp-light-bg]:not(.dark) body { background-color: var(--dp-light-bg) !important; }
+      html[data-dp-light-bg]:not(.dark) header { background-color: color-mix(in srgb, var(--dp-light-bg) 85%, transparent) !important; }
+      html[data-dp-light-bg]:not(.dark) #mobile-menu { background-color: color-mix(in srgb, var(--dp-light-bg) 95%, transparent) !important; }
+    `;
+      document.head.appendChild(style);
+    }
 
     function applyDarkBg(color: string) {
-      // Use a style tag to override dark mode backgrounds
-      let style = document.getElementById("dp-dark-bg-style");
-      if (!style) {
-        style = document.createElement("style");
-        style.id = "dp-dark-bg-style";
-        document.head.appendChild(style);
-      }
-      style.textContent = `
-      .dark body, .dark header, .dark #mobile-menu { background-color: ${color} !important; }
-      .dark header, .dark #mobile-menu { background-color: color-mix(in srgb, ${color} 80%, transparent) !important; }
-    `;
+      ensureBgStyle();
+      document.documentElement.style.setProperty("--dp-dark-bg", color);
+      document.documentElement.setAttribute("data-dp-dark-bg", "");
     }
 
     function applyLightBg(color: string) {
-      let style = document.getElementById("dp-light-bg-style");
-      if (!style) {
-        style = document.createElement("style");
-        style.id = "dp-light-bg-style";
-        document.head.appendChild(style);
-      }
-      style.textContent = `
-      :not(.dark) body, :not(.dark) header, :not(.dark) #mobile-menu { background-color: ${color} !important; }
-      :not(.dark) header, :not(.dark) #mobile-menu { background-color: color-mix(in srgb, ${color} 80%, transparent) !important; }
-    `;
+      ensureBgStyle();
+      document.documentElement.style.setProperty("--dp-light-bg", color);
+      document.documentElement.setAttribute("data-dp-light-bg", "");
     }
+
+    function removeDarkBg() {
+      document.documentElement.style.removeProperty("--dp-dark-bg");
+      document.documentElement.removeAttribute("data-dp-dark-bg");
+    }
+
+    function removeLightBg() {
+      document.documentElement.style.removeProperty("--dp-light-bg");
+      document.documentElement.removeAttribute("data-dp-light-bg");
+    }
+
+    // Dark mode bg buttons
+    function initDarkBgBtns() {
+      document.querySelectorAll(".dp-bg-btn").forEach((btn) => {
+        if (state.darkBg && btn.getAttribute("data-bg") === state.darkBg) {
+          btn.classList.add("ring-2", "ring-offset-1", "ring-stone-400");
+        }
+        btn.addEventListener("click", () => {
+          const bg = btn.getAttribute("data-bg")!;
+          state.darkBg = bg;
+          document
+            .querySelectorAll(".dp-bg-btn")
+            .forEach((b) =>
+              b.classList.remove("ring-2", "ring-offset-1", "ring-stone-400"),
+            );
+          btn.classList.add("ring-2", "ring-offset-1", "ring-stone-400");
+          applyDarkBg(bg);
+          applyAll();
+        });
+      });
+    }
+
+    // Light mode bg buttons
+    function initLightBgBtns() {
+      document.querySelectorAll(".dp-lbg-btn").forEach((btn) => {
+        if (state.lightBg && btn.getAttribute("data-lbg") === state.lightBg) {
+          btn.classList.add("ring-2", "ring-offset-1", "ring-stone-600");
+        }
+        btn.addEventListener("click", () => {
+          const bg = btn.getAttribute("data-lbg")!;
+          state.lightBg = bg;
+          document
+            .querySelectorAll(".dp-lbg-btn")
+            .forEach((b) =>
+              b.classList.remove("ring-2", "ring-offset-1", "ring-stone-600"),
+            );
+          btn.classList.add("ring-2", "ring-offset-1", "ring-stone-600");
+          applyLightBg(bg);
+          applyAll();
+        });
+      });
+    }
+
+    // Reset button
+    if (resetBtn) {
+      const freshReset = resetBtn.cloneNode(true) as HTMLElement;
+      resetBtn.parentNode?.replaceChild(freshReset, resetBtn);
+      freshReset.addEventListener("click", () => {
+        localStorage.removeItem("dp-state");
+        state = {};
+        // Remove all overrides
+        const root = document.documentElement;
+        root.style.removeProperty("--font-serif");
+        root.style.removeProperty("--font-sans");
+        root.style.removeProperty("--color-accent");
+        root.style.removeProperty("--color-accent-hover");
+        root.style.fontSize = "";
+        removeDarkBg();
+        removeLightBg();
+        // Reset UI
+        headingSel.selectedIndex = 0;
+        bodySel.selectedIndex = 0;
+        sizeSl.value = "16";
+        if (sizeLabel) sizeLabel.textContent = "16px";
+        document
+          .querySelectorAll(".dp-color-btn, .dp-bg-btn, .dp-lbg-btn")
+          .forEach((b) => {
+            b.classList.remove(
+              "ring-2",
+              "ring-offset-1",
+              "ring-stone-100",
+              "ring-stone-400",
+              "ring-stone-600",
+            );
+          });
+        if (output) output.textContent = "{}";
+      });
+    }
+
+    initAccentBtns();
+    initDarkBgBtns();
+    initLightBgBtns();
 
     // Apply saved state on load
     if (state.accent) {
@@ -421,12 +609,12 @@
       );
       document.documentElement.style.setProperty(
         "--color-accent-hover",
-        state.accentHover,
+        state.accentHover || state.accent,
       );
     }
     if (state.darkBg) applyDarkBg(state.darkBg);
     if (state.lightBg) applyLightBg(state.lightBg);
-    apply();
+    applyAll();
   }
 
   initDesignPanel();
