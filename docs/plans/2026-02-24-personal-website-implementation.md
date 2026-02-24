@@ -15,6 +15,7 @@
 ## Task 1: Project Scaffolding
 
 **Files:**
+
 - Create: `package.json`, `astro.config.mjs`, `tsconfig.json`, `src/pages/index.astro`, `src/styles/global.css`
 - Delete: `blog/claude-code-investigating-itself.md` (will be moved to content collection later)
 
@@ -122,6 +123,7 @@ git commit -m "feat: scaffold Astro project with Tailwind CSS v4"
 ## Task 2: Code Quality Tooling (ESLint, Prettier, Husky)
 
 **Files:**
+
 - Create: `eslint.config.mjs`, `.prettierrc`, `.prettierignore`, `.husky/pre-commit`
 - Modify: `package.json` (scripts, lint-staged config)
 
@@ -243,6 +245,7 @@ git commit -m "feat: add ESLint, Prettier, and Husky pre-commit hooks"
 ## Task 3: Testing Infrastructure (Vitest + Playwright)
 
 **Files:**
+
 - Create: `vitest.config.ts`, `playwright.config.ts`, `tests/unit/example.test.ts`, `tests/e2e/smoke.spec.ts`
 - Modify: `package.json` (scripts)
 
@@ -363,6 +366,7 @@ git commit -m "feat: add Vitest and Playwright testing infrastructure"
 ## Task 4: GitHub Actions CI Pipeline
 
 **Files:**
+
 - Create: `.github/workflows/ci.yml`
 
 **Step 1: Create CI workflow**
@@ -429,6 +433,7 @@ git commit -m "feat: add GitHub Actions CI pipeline"
 ## Task 5: Base Layout and Navigation
 
 **Files:**
+
 - Create: `src/layouts/BaseLayout.astro`, `src/components/Header.astro`, `src/components/Footer.astro`
 - Modify: `src/pages/index.astro`, `src/styles/global.css`
 
@@ -439,7 +444,7 @@ Update `src/styles/global.css` to import fonts and set up CSS custom properties:
 ```css
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap");
 
 @theme {
   --font-sans: "Inter", sans-serif;
@@ -468,25 +473,34 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 bg-stone-50/80 backdrop-blur-sm border-b border-stone-200">
+<header
+  class="sticky top-0 z-50 bg-stone-50/80 backdrop-blur-sm border-b border-stone-200"
+>
   <nav class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-    <a href="/" class="font-serif text-xl font-bold text-stone-900 hover:text-accent transition-colors">
+    <a
+      href="/"
+      class="font-serif text-xl font-bold text-stone-900 hover:text-accent transition-colors"
+    >
       ffledgling
     </a>
     <ul class="flex gap-6 text-sm">
-      {navLinks.map((link) => (
-        <li>
-          <a
-            href={link.href}
-            class:list={[
-              "transition-colors hover:text-accent",
-              currentPath === link.href ? "text-accent font-medium" : "text-stone-600",
-            ]}
-          >
-            {link.label}
-          </a>
-        </li>
-      ))}
+      {
+        navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                "transition-colors hover:text-accent",
+                currentPath === link.href
+                  ? "text-accent font-medium"
+                  : "text-stone-600",
+              ]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </nav>
 </header>
@@ -523,7 +537,8 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Personal website of Anhad Jai Singh" } = Astro.props;
+const { title, description = "Personal website of Anhad Jai Singh" } =
+  Astro.props;
 ---
 
 <!doctype html>
@@ -554,11 +569,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout title="Home">
   <h1 class="font-serif text-4xl font-bold mb-2">Anhad Jai Singh</h1>
-  <p class="text-lg text-stone-500 mb-8">Software developer. Curious about everything.</p>
+  <p class="text-lg text-stone-500 mb-8">
+    Software developer. Curious about everything.
+  </p>
   <p class="text-stone-700 max-w-prose leading-relaxed">
-    Welcome to my corner of the internet. I write about software, and occasionally about
-    the many other things that catch my attention — finance, golf, mechanical keyboards,
-    watches, art, and whatever else I'm exploring.
+    Welcome to my corner of the internet. I write about software, and
+    occasionally about the many other things that catch my attention — finance,
+    golf, mechanical keyboards, watches, art, and whatever else I'm exploring.
   </p>
 </BaseLayout>
 ```
@@ -612,6 +629,7 @@ git commit -m "feat: add base layout with header navigation and footer"
 ## Task 6: Content Collections Schema
 
 **Files:**
+
 - Create: `src/content.config.ts`, `src/content/blog/.gitkeep`, `src/content/projects/.gitkeep`
 
 **Step 1: Create content collection config**
@@ -707,6 +725,7 @@ git commit -m "feat: add content collection schemas for blog and projects"
 ## Task 7: Blog Listing and Post Pages
 
 **Files:**
+
 - Create: `src/pages/blog/index.astro`, `src/pages/blog/[...slug].astro`, `src/layouts/BlogPostLayout.astro`, `src/lib/utils.ts`
 
 **Step 1: Create utility functions**
@@ -792,13 +811,15 @@ const { title, description, date, tags } = Astro.props;
       <h1 class="font-serif text-4xl font-bold mb-3">{title}</h1>
       <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-stone-500">
         <time datetime={date.toISOString()}>{formatDate(date)}</time>
-        {tags.length > 0 && (
-          <div class="flex gap-2">
-            {tags.map((tag) => (
-              <span class="text-accent">#{tag}</span>
-            ))}
-          </div>
-        )}
+        {
+          tags.length > 0 && (
+            <div class="flex gap-2">
+              {tags.map((tag) => (
+                <span class="text-accent">#{tag}</span>
+              ))}
+            </div>
+          )
+        }
       </div>
     </header>
     <div class="prose prose-stone prose-lg max-w-none">
@@ -826,28 +847,30 @@ const posts = (await getCollection("blog"))
 <BaseLayout title="Blog">
   <h1 class="font-serif text-4xl font-bold mb-8">Blog</h1>
   <ul class="space-y-8">
-    {posts.map((post) => (
-      <li>
-        <a href={`/blog/${post.id}`} class="group block">
-          <h2 class="text-xl font-semibold group-hover:text-accent transition-colors">
-            {post.data.title}
-          </h2>
-          <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-stone-500 mt-1">
-            <time datetime={post.data.date.toISOString()}>
-              {formatDate(post.data.date)}
-            </time>
-            {post.data.tags.length > 0 && (
-              <div class="flex gap-2">
-                {post.data.tags.map((tag: string) => (
-                  <span>#{tag}</span>
-                ))}
-              </div>
-            )}
-          </div>
-          <p class="text-stone-600 mt-2">{post.data.description}</p>
-        </a>
-      </li>
-    ))}
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.id}`} class="group block">
+            <h2 class="text-xl font-semibold group-hover:text-accent transition-colors">
+              {post.data.title}
+            </h2>
+            <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-stone-500 mt-1">
+              <time datetime={post.data.date.toISOString()}>
+                {formatDate(post.data.date)}
+              </time>
+              {post.data.tags.length > 0 && (
+                <div class="flex gap-2">
+                  {post.data.tags.map((tag: string) => (
+                    <span>#{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+            <p class="text-stone-600 mt-2">{post.data.description}</p>
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </BaseLayout>
 ```
@@ -950,6 +973,7 @@ git commit -m "feat: add blog listing and post pages with content collections"
 ## Task 8: Remaining Pages (About, Projects, Links, Contact)
 
 **Files:**
+
 - Create: `src/pages/about.astro`, `src/pages/projects.astro`, `src/pages/links.astro`, `src/pages/contact.astro`
 
 **Step 1: Create About page**
@@ -966,9 +990,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h1 class="font-serif text-4xl font-bold mb-8">About</h1>
     <div class="prose prose-stone prose-lg">
       <p>
-        I'm Anhad Jai Singh — a software developer by profession with a wide range of
-        interests spanning finance, economics, golf, mechanical keyboards, watches, art,
-        fashion, and more.
+        I'm Anhad Jai Singh — a software developer by profession with a wide
+        range of interests spanning finance, economics, golf, mechanical
+        keyboards, watches, art, fashion, and more.
       </p>
       <p>
         Placeholder for more detailed about content. Link to
@@ -988,38 +1012,47 @@ Create `src/pages/projects.astro`:
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
-const projects = (await getCollection("projects"))
-  .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.sortOrder - b.data.sortOrder,
+);
 ---
 
 <BaseLayout title="Projects">
   <h1 class="font-serif text-4xl font-bold mb-8">Projects</h1>
   <div class="grid gap-6 sm:grid-cols-2">
-    {projects.map((project) => (
-      <div class="border border-stone-200 rounded-lg p-6 hover:border-stone-300 transition-colors">
-        <h2 class="text-lg font-semibold mb-1">{project.data.title}</h2>
-        <p class="text-stone-600 text-sm mb-3">{project.data.description}</p>
-        <div class="flex flex-wrap gap-2 mb-3">
-          {project.data.tags.map((tag: string) => (
-            <span class="text-xs bg-stone-100 text-stone-600 px-2 py-0.5 rounded">
-              {tag}
-            </span>
-          ))}
+    {
+      projects.map((project) => (
+        <div class="border border-stone-200 rounded-lg p-6 hover:border-stone-300 transition-colors">
+          <h2 class="text-lg font-semibold mb-1">{project.data.title}</h2>
+          <p class="text-stone-600 text-sm mb-3">{project.data.description}</p>
+          <div class="flex flex-wrap gap-2 mb-3">
+            {project.data.tags.map((tag: string) => (
+              <span class="text-xs bg-stone-100 text-stone-600 px-2 py-0.5 rounded">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div class="flex gap-3 text-sm">
+            {project.data.repoUrl && (
+              <a
+                href={project.data.repoUrl}
+                class="text-accent hover:underline"
+              >
+                Source
+              </a>
+            )}
+            {project.data.demoUrl && (
+              <a
+                href={project.data.demoUrl}
+                class="text-accent hover:underline"
+              >
+                Demo
+              </a>
+            )}
+          </div>
         </div>
-        <div class="flex gap-3 text-sm">
-          {project.data.repoUrl && (
-            <a href={project.data.repoUrl} class="text-accent hover:underline">
-              Source
-            </a>
-          )}
-          {project.data.demoUrl && (
-            <a href={project.data.demoUrl} class="text-accent hover:underline">
-              Demo
-            </a>
-          )}
-        </div>
-      </div>
-    ))}
+      ))
+    }
   </div>
 </BaseLayout>
 ```
@@ -1033,9 +1066,21 @@ Create `src/pages/links.astro`:
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const links = [
-  { name: "GitHub", url: "https://github.com/ffledgling", handle: "@ffledgling" },
-  { name: "LinkedIn", url: "https://linkedin.com/in/anhadjaisingh", handle: "Anhad Jai Singh" },
-  { name: "X / Twitter", url: "https://x.com/ffledgling", handle: "@ffledgling" },
+  {
+    name: "GitHub",
+    url: "https://github.com/ffledgling",
+    handle: "@ffledgling",
+  },
+  {
+    name: "LinkedIn",
+    url: "https://linkedin.com/in/anhadjaisingh",
+    handle: "Anhad Jai Singh",
+  },
+  {
+    name: "X / Twitter",
+    url: "https://x.com/ffledgling",
+    handle: "@ffledgling",
+  },
 ];
 ---
 
@@ -1043,19 +1088,21 @@ const links = [
   <div class="max-w-prose mx-auto">
     <h1 class="font-serif text-4xl font-bold mb-8">Links</h1>
     <ul class="space-y-4">
-      {links.map((link) => (
-        <li>
-          <a
-            href={link.url}
-            class="flex items-center justify-between p-4 border border-stone-200 rounded-lg hover:border-stone-300 transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="font-medium">{link.name}</span>
-            <span class="text-stone-500 text-sm">{link.handle}</span>
-          </a>
-        </li>
-      ))}
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.url}
+              class="flex items-center justify-between p-4 border border-stone-200 rounded-lg hover:border-stone-300 transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="font-medium">{link.name}</span>
+              <span class="text-stone-500 text-sm">{link.handle}</span>
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </div>
 </BaseLayout>
@@ -1079,7 +1126,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <a href="mailto:ffledgling@gmail.com">ffledgling@gmail.com</a>.
       </p>
       <p>
-        You can also find me on <a href="https://github.com/ffledgling">GitHub</a>
+        You can also find me on <a href="https://github.com/ffledgling"
+          >GitHub</a
+        >
         and <a href="https://linkedin.com/in/anhadjaisingh">LinkedIn</a>.
       </p>
     </div>
@@ -1130,6 +1179,7 @@ git commit -m "feat: add About, Projects, Links, and Contact pages"
 ## Task 9: Home Page with Recent Posts
 
 **Files:**
+
 - Modify: `src/pages/index.astro`
 
 **Step 1: Update home page to show recent posts**
@@ -1151,33 +1201,41 @@ const recentPosts = (await getCollection("blog"))
 <BaseLayout title="Home">
   <section class="mb-16">
     <h1 class="font-serif text-4xl font-bold mb-2">Anhad Jai Singh</h1>
-    <p class="text-lg text-stone-500 mb-8">Software developer. Curious about everything.</p>
+    <p class="text-lg text-stone-500 mb-8">
+      Software developer. Curious about everything.
+    </p>
     <p class="text-stone-700 max-w-prose leading-relaxed">
-      Welcome to my corner of the internet. I write about software, and occasionally about
-      the many other things that catch my attention — finance, golf, mechanical keyboards,
-      watches, art, and whatever else I'm exploring.
+      Welcome to my corner of the internet. I write about software, and
+      occasionally about the many other things that catch my attention —
+      finance, golf, mechanical keyboards, watches, art, and whatever else I'm
+      exploring.
     </p>
   </section>
 
   <section>
     <h2 class="font-serif text-2xl font-bold mb-6">Recent Writing</h2>
     <ul class="space-y-6">
-      {recentPosts.map((post) => (
-        <li>
-          <a href={`/blog/${post.id}`} class="group block">
-            <h3 class="text-lg font-semibold group-hover:text-accent transition-colors">
-              {post.data.title}
-            </h3>
-            <div class="text-sm text-stone-500 mt-1">
-              <time datetime={post.data.date.toISOString()}>
-                {formatDate(post.data.date)}
-              </time>
-            </div>
-          </a>
-        </li>
-      ))}
+      {
+        recentPosts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}`} class="group block">
+              <h3 class="text-lg font-semibold group-hover:text-accent transition-colors">
+                {post.data.title}
+              </h3>
+              <div class="text-sm text-stone-500 mt-1">
+                <time datetime={post.data.date.toISOString()}>
+                  {formatDate(post.data.date)}
+                </time>
+              </div>
+            </a>
+          </li>
+        ))
+      }
     </ul>
-    <a href="/blog" class="inline-block mt-6 text-accent hover:underline text-sm">
+    <a
+      href="/blog"
+      class="inline-block mt-6 text-accent hover:underline text-sm"
+    >
       View all posts &rarr;
     </a>
   </section>
@@ -1204,6 +1262,7 @@ git commit -m "feat: add recent posts to homepage"
 ## Task 10: Dark Mode
 
 **Files:**
+
 - Create: `src/components/ThemeToggle.astro`
 - Modify: `src/layouts/BaseLayout.astro`, `src/styles/global.css`
 
@@ -1215,7 +1274,7 @@ Update `src/styles/global.css` to add dark variant colors:
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap");
 
 @theme {
   --font-sans: "Inter", sans-serif;
@@ -1246,7 +1305,9 @@ Create `src/components/ThemeToggle.astro`:
   function initTheme() {
     const toggle = document.getElementById("theme-toggle");
     const saved = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
 
     if (saved === "dark" || (!saved && prefersDark)) {
       document.documentElement.classList.add("dark");
@@ -1271,12 +1332,15 @@ Update `src/components/Header.astro` to include the toggle in the nav bar (after
 Update the `<body>` class in `src/layouts/BaseLayout.astro`:
 
 ```html
-<body class="bg-stone-50 dark:bg-stone-900 text-stone-900 dark:text-stone-100 font-sans antialiased transition-colors">
+<body
+  class="bg-stone-50 dark:bg-stone-900 text-stone-900 dark:text-stone-100 font-sans antialiased transition-colors"
+></body>
 ```
 
 **Step 5: Update all components with dark mode variants**
 
 Go through Header, Footer, blog listing, blog post layout, and all pages — add `dark:` variants for backgrounds, text colors, and borders. For example:
+
 - `border-stone-200` → `border-stone-200 dark:border-stone-700`
 - `text-stone-500` → `text-stone-500 dark:text-stone-400`
 - `bg-stone-100` → `bg-stone-100 dark:bg-stone-800`
@@ -1301,6 +1365,7 @@ git commit -m "feat: add dark mode with theme toggle"
 ## Task 11: Mobile Responsive Navigation
 
 **Files:**
+
 - Modify: `src/components/Header.astro`
 
 **Step 1: Add mobile hamburger menu**
@@ -1346,6 +1411,7 @@ git commit -m "feat: add responsive mobile navigation"
 ## Task 12: Documentation (CLAUDE.md, Publishing Workflow, Architecture)
 
 **Files:**
+
 - Create: `CLAUDE.md`, `docs/publishing-workflow.md`, `docs/architecture.md`
 
 **Step 1: Create CLAUDE.md**
@@ -1380,6 +1446,7 @@ Personal website for Anhad Jai Singh at ffledgling.dev. Built with Astro v5 + Ta
 ## Coding Standards
 
 ### Required for every change:
+
 1. **TypeScript strict mode** — No `any` types. All new code must be fully typed.
 2. **Lint must pass** — ESLint + Prettier. Pre-commit hooks enforce this automatically.
 3. **Tests required** — Every new feature or bug fix needs tests:
@@ -1389,6 +1456,7 @@ Personal website for Anhad Jai Singh at ffledgling.dev. Built with Astro v5 + Ta
 5. **Commits are atomic** — One logical change per commit. Use conventional commit messages (`feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`).
 
 ### Testing guidelines:
+
 - Unit tests live in `tests/unit/` and mirror source structure
 - E2E tests live in `tests/e2e/` and test user-visible behavior
 - Test file naming: `*.test.ts` for unit, `*.spec.ts` for E2E
@@ -1396,17 +1464,20 @@ Personal website for Anhad Jai Singh at ffledgling.dev. Built with Astro v5 + Ta
 - E2E tests require a build first (`npm run build`)
 
 ### Content:
+
 - Blog posts go in `src/content/blog/` as `.md` or `.mdx` files
 - Projects go in `src/content/projects/` as `.md` files
 - See `docs/publishing-workflow.md` for frontmatter schemas and conventions
 
 ### Styling:
+
 - Use Tailwind CSS utility classes
 - Colors, fonts, and spacing are configured in `src/styles/global.css` via `@theme`
 - Always include `dark:` variants for dark mode support
 - Keep content max-width at ~720px for prose readability
 
 ### File organization:
+
 - Pages: `src/pages/`
 - Layouts: `src/layouts/`
 - Components: `src/components/`
@@ -1419,7 +1490,7 @@ Personal website for Anhad Jai Singh at ffledgling.dev. Built with Astro v5 + Ta
 
 Create `docs/publishing-workflow.md`:
 
-```markdown
+````markdown
 # Publishing Workflow
 
 ## Writing a Blog Post
@@ -1436,6 +1507,7 @@ Create `docs/publishing-workflow.md`:
    draft: false
    ---
    ```
+````
 
 3. Write your content in Markdown below the frontmatter
 4. For interactive content, use `.mdx` extension and import components:
@@ -1447,7 +1519,8 @@ Create `docs/publishing-workflow.md`:
    date: 2026-02-24
    tags: ["interactive"]
    ---
-   import MyComponent from '../../components/MyComponent.tsx';
+
+   import MyComponent from "../../components/MyComponent.tsx";
 
    Regular markdown here.
 
@@ -1466,25 +1539,25 @@ Create `docs/publishing-workflow.md`:
 
 ### Blog Posts (`src/content/blog/`)
 
-| Field | Type | Required | Default | Description |
-|-------|------|----------|---------|-------------|
-| title | string | Yes | — | Post title |
-| description | string | Yes | — | Brief description for listings/SEO |
-| date | date | Yes | — | Publication date (YYYY-MM-DD) |
-| updatedDate | date | No | — | Last updated date |
-| tags | string[] | No | [] | Post tags |
-| draft | boolean | No | false | Set true to hide from listings |
+| Field       | Type     | Required | Default | Description                        |
+| ----------- | -------- | -------- | ------- | ---------------------------------- |
+| title       | string   | Yes      | —       | Post title                         |
+| description | string   | Yes      | —       | Brief description for listings/SEO |
+| date        | date     | Yes      | —       | Publication date (YYYY-MM-DD)      |
+| updatedDate | date     | No       | —       | Last updated date                  |
+| tags        | string[] | No       | []      | Post tags                          |
+| draft       | boolean  | No       | false   | Set true to hide from listings     |
 
 ### Projects (`src/content/projects/`)
 
-| Field | Type | Required | Default | Description |
-|-------|------|----------|---------|-------------|
-| title | string | Yes | — | Project name |
-| description | string | Yes | — | One-line description |
-| tags | string[] | No | [] | Tech tags |
-| repoUrl | string (URL) | No | — | Source code link |
-| demoUrl | string (URL) | No | — | Live demo link |
-| sortOrder | number | No | 0 | Display order (lower = first) |
+| Field       | Type         | Required | Default | Description                   |
+| ----------- | ------------ | -------- | ------- | ----------------------------- |
+| title       | string       | Yes      | —       | Project name                  |
+| description | string       | Yes      | —       | One-line description          |
+| tags        | string[]     | No       | []      | Tech tags                     |
+| repoUrl     | string (URL) | No       | —       | Source code link              |
+| demoUrl     | string (URL) | No       | —       | Live demo link                |
+| sortOrder   | number       | No       | 0       | Display order (lower = first) |
 
 ## Adding a Project
 
@@ -1504,7 +1577,8 @@ npm run preview      # Preview production build locally
 ## Deployment
 
 Deployment is automatic via Cloudflare Pages on push to `main`. No manual steps required.
-```
+
+````
 
 **Step 3: Create architecture doc**
 
@@ -1523,17 +1597,19 @@ Create `docs/architecture.md`:
 
 ## Project Structure
 
-```
+````
+
 src/
-├── content/           Content Collections (markdown files)
-│   ├── blog/          Blog posts
-│   └── projects/      Project descriptions
-├── content.config.ts  Collection schemas (Zod validation)
-├── layouts/           Page layout templates
-├── pages/             File-based routing
-├── components/        Reusable UI components
-├── lib/               Utility functions
-└── styles/            Global CSS and theme configuration
+├── content/ Content Collections (markdown files)
+│ ├── blog/ Blog posts
+│ └── projects/ Project descriptions
+├── content.config.ts Collection schemas (Zod validation)
+├── layouts/ Page layout templates
+├── pages/ File-based routing
+├── components/ Reusable UI components
+├── lib/ Utility functions
+└── styles/ Global CSS and theme configuration
+
 ```
 
 ## Key Decisions
@@ -1577,6 +1653,7 @@ git commit -m "docs: add CLAUDE.md, publishing workflow, and architecture docs"
 ## Task 13: Cloudflare Pages Deploy Configuration
 
 **Files:**
+
 - Create: `wrangler.toml`
 
 **Step 1: Create wrangler.toml**
@@ -1603,6 +1680,7 @@ git commit -m "feat: add Cloudflare Pages deployment config"
 ## Task 14: Content Migration (Old Blog Posts)
 
 **Files:**
+
 - Create: Multiple files in `src/content/blog/`
 - Modify: Move `blog/claude-code-investigating-itself.md` to `src/content/blog/` with proper frontmatter
 
@@ -1615,6 +1693,7 @@ git clone https://github.com/ffledgling/blog /tmp/ffledgling-blog
 **Step 2: Write a migration script**
 
 Create a temporary script that:
+
 1. Reads each post from `/tmp/ffledgling-blog/_posts/`
 2. Extracts and normalizes frontmatter to match the new schema (title, description, date, tags)
 3. Strips WordPress-era fields (wordpress_id, wordpress_url, author_login, author_email, date_gmt)
@@ -1671,6 +1750,7 @@ git commit -m "chore: remove old blog directory from repo root"
 ## Task 15: Final Integration Test and Polish
 
 **Files:**
+
 - Modify: Various (fix any issues found)
 
 **Step 1: Run full test suite**
@@ -1710,20 +1790,20 @@ git commit -m "fix: polish and integration fixes"
 
 ## Summary
 
-| Task | Description | Key Files |
-|------|-------------|-----------|
-| 1 | Project scaffolding | `package.json`, `astro.config.mjs`, `src/pages/index.astro` |
-| 2 | Code quality tooling | `eslint.config.mjs`, `.prettierrc`, `.husky/pre-commit` |
-| 3 | Testing infrastructure | `vitest.config.ts`, `playwright.config.ts`, smoke tests |
-| 4 | CI pipeline | `.github/workflows/ci.yml` |
-| 5 | Base layout + nav | `BaseLayout.astro`, `Header.astro`, `Footer.astro` |
-| 6 | Content schemas | `src/content.config.ts`, test content |
-| 7 | Blog pages | Blog listing, post pages, BlogPostLayout |
-| 8 | Remaining pages | About, Projects, Links, Contact |
-| 9 | Home page | Recent posts on homepage |
-| 10 | Dark mode | ThemeToggle, dark variants |
-| 11 | Mobile nav | Responsive hamburger menu |
-| 12 | Documentation | CLAUDE.md, publishing-workflow.md, architecture.md |
-| 13 | Deploy config | `wrangler.toml` |
-| 14 | Content migration | 28 blog posts from old site + existing |
-| 15 | Final polish | Integration testing, visual review |
+| Task | Description            | Key Files                                                   |
+| ---- | ---------------------- | ----------------------------------------------------------- |
+| 1    | Project scaffolding    | `package.json`, `astro.config.mjs`, `src/pages/index.astro` |
+| 2    | Code quality tooling   | `eslint.config.mjs`, `.prettierrc`, `.husky/pre-commit`     |
+| 3    | Testing infrastructure | `vitest.config.ts`, `playwright.config.ts`, smoke tests     |
+| 4    | CI pipeline            | `.github/workflows/ci.yml`                                  |
+| 5    | Base layout + nav      | `BaseLayout.astro`, `Header.astro`, `Footer.astro`          |
+| 6    | Content schemas        | `src/content.config.ts`, test content                       |
+| 7    | Blog pages             | Blog listing, post pages, BlogPostLayout                    |
+| 8    | Remaining pages        | About, Projects, Links, Contact                             |
+| 9    | Home page              | Recent posts on homepage                                    |
+| 10   | Dark mode              | ThemeToggle, dark variants                                  |
+| 11   | Mobile nav             | Responsive hamburger menu                                   |
+| 12   | Documentation          | CLAUDE.md, publishing-workflow.md, architecture.md          |
+| 13   | Deploy config          | `wrangler.toml`                                             |
+| 14   | Content migration      | 28 blog posts from old site + existing                      |
+| 15   | Final polish           | Integration testing, visual review                          |
