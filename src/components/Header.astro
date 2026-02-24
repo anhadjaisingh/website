@@ -2,13 +2,9 @@
 import ThemeToggle from "./ThemeToggle.astro";
 
 const navLinks = [
-  { href: "/", label: "Home" },
   { href: "/blog", label: "Blog" },
   { href: "/annotations", label: "Annotations" },
   { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
-  { href: "/links", label: "Links" },
-  { href: "/contact", label: "Contact" },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -17,16 +13,16 @@ const currentPath = Astro.url.pathname;
 <header
   class="sticky top-0 z-50 bg-slate-50/80 dark:bg-[#0d1520]/85 backdrop-blur-sm border-b border-stone-200 dark:border-stone-700"
 >
-  <nav class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+  <nav class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
     <a
       href="/"
-      class="font-serif text-xl font-bold text-stone-900 dark:text-stone-100 hover:text-accent dark:hover:text-accent transition-colors"
+      class="font-serif text-2xl font-bold text-stone-900 dark:text-stone-100 hover:text-accent dark:hover:text-accent transition-colors"
     >
       ffledgling
     </a>
 
     <!-- Desktop navigation -->
-    <ul class="hidden md:flex gap-6 text-sm">
+    <ul class="hidden md:flex items-center gap-6 text-base">
       {
         navLinks.map((link) => (
           <li>
@@ -34,7 +30,8 @@ const currentPath = Astro.url.pathname;
               href={link.href}
               class:list={[
                 "transition-colors hover:text-accent",
-                currentPath === link.href
+                currentPath === link.href ||
+                currentPath.startsWith(link.href + "/")
                   ? "text-accent font-medium"
                   : "text-stone-600 dark:text-stone-400",
               ]}
@@ -44,12 +41,10 @@ const currentPath = Astro.url.pathname;
           </li>
         ))
       }
+      <li>
+        <ThemeToggle />
+      </li>
     </ul>
-
-    <!-- Desktop theme toggle -->
-    <div class="hidden md:block">
-      <ThemeToggle />
-    </div>
 
     <!-- Mobile controls -->
     <div class="flex md:hidden items-center gap-3">
@@ -99,7 +94,7 @@ const currentPath = Astro.url.pathname;
     id="mobile-menu"
     class="hidden md:hidden border-t border-stone-200 dark:border-stone-700 bg-slate-50/95 dark:bg-[#0d1520]/95 backdrop-blur-sm"
   >
-    <ul class="max-w-3xl mx-auto px-4 py-3 flex flex-col gap-3 text-sm">
+    <ul class="max-w-3xl mx-auto px-4 py-3 flex flex-col gap-3 text-base">
       {
         navLinks.map((link) => (
           <li>
@@ -107,7 +102,8 @@ const currentPath = Astro.url.pathname;
               href={link.href}
               class:list={[
                 "block py-1 transition-colors hover:text-accent",
-                currentPath === link.href
+                currentPath === link.href ||
+                currentPath.startsWith(link.href + "/")
                   ? "text-accent font-medium"
                   : "text-stone-600 dark:text-stone-400",
               ]}
