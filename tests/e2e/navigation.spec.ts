@@ -5,7 +5,7 @@ test("header navigation links are present on desktop", async ({ page }) => {
   const nav = page.locator("header nav");
   await expect(nav.getByRole("link", { name: "Home" })).toBeVisible();
   await expect(nav.getByRole("link", { name: "Blog" })).toBeVisible();
-  await expect(nav.getByRole("link", { name: "About" })).toBeVisible();
+  await expect(nav.getByRole("link", { name: "Annotations" })).toBeVisible();
 });
 
 test("mobile menu toggle works", async ({ page }) => {
