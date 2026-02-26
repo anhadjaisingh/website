@@ -4,6 +4,17 @@ import {
   type Annotation,
   type AnnotatedSegment,
 } from "../lib/annotations";
+import { renderAnnotationMarkdown } from "../lib/render-markdown";
+
+function MarkdownNote({ content }: { content: string }) {
+  const html = renderAnnotationMarkdown(content);
+  return (
+    <span
+      className="annotation-note-content"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+}
 
 interface Props {
   /** The full source article text (plain text extracted from HTML) */
@@ -39,7 +50,7 @@ function MarginNote({
       style={{ top: `${top}px` }}
     >
       <div className="border-l-2 border-accent/30 pl-3 py-1">
-        {annotation.note}
+        <MarkdownNote content={annotation.note} />
       </div>
     </div>
   );
@@ -56,7 +67,7 @@ function MobilePopover({
     <div className="mt-2 mb-2 p-3 bg-stone-100 dark:bg-stone-800 rounded-lg border border-stone-200 dark:border-stone-700 text-sm xl:hidden">
       <div className="flex justify-between items-start gap-2">
         <span className="text-stone-700 dark:text-stone-300">
-          {annotation.note}
+          <MarkdownNote content={annotation.note} />
         </span>
         <button
           onClick={onClose}
@@ -106,7 +117,7 @@ function HighlightedText({
       )}
       {showPopover && segment.annotation.type === "inline" && (
         <div className="block mt-3 mb-3 p-4 bg-stone-50 dark:bg-stone-800/50 border-l-4 border-accent/50 rounded-r-lg text-sm leading-relaxed text-stone-700 dark:text-stone-300">
-          {segment.annotation.note}
+          <MarkdownNote content={segment.annotation.note} />
         </div>
       )}
     </>
