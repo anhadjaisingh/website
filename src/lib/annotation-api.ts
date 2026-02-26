@@ -74,6 +74,7 @@ async function handleCreate(req: IncomingMessage, res: ServerResponse) {
       `author: "${article.author.replace(/"/g, '\\"')}"`,
       `sourceUrl: "${url}"`,
       `snapshotDate: ${today}`,
+      `draft: true`,
       `description: "My annotated reading of ${article.title.replace(/"/g, '\\"')}."`,
       `tags: []`,
       "---",
