@@ -1,4 +1,3 @@
-import { JSDOM } from "jsdom";
 import { chromium } from "playwright";
 
 export interface FetchedArticle {
