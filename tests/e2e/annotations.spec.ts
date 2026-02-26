@@ -25,7 +25,7 @@ test.describe("Annotation detail page", () => {
     await expect(page.locator("h1")).toContainText(
       "Do Things That Don't Scale",
     );
-    await expect(page.locator("text=Paul Graham")).toBeVisible();
+    await expect(page.getByText("by Paul Graham")).toBeVisible();
     await expect(page.locator("text=Original article")).toBeVisible();
   });
 
