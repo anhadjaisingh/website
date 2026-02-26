@@ -2,7 +2,6 @@ import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
 import type { Annotation } from "./annotations";
-import { fetchArticle } from "./article-fetcher";
 import type { IncomingMessage, ServerResponse } from "node:http";
 
 const ANNOTATIONS_DIR = path.join(process.cwd(), "src/content/annotations");
@@ -35,6 +34,8 @@ async function handleCreate(req: IncomingMessage, res: ServerResponse) {
   }
 
   try {
+    // Dynamic import to avoid Vite processing Playwright through its module runner
+    const { fetchArticle } = await import("./article-fetcher");
     const article = await fetchArticle(url);
 
     const dir = path.join(ANNOTATIONS_DIR, article.slug);
