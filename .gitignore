@@ -2,7 +2,9 @@ node_modules/
 dist/
 .astro/
 .playwright-mcp/
-.claude/
+.claude/*
+!.claude/skills/
+!.claude/settings.local.json
 .old-blog/
 test-results/
 *.png
