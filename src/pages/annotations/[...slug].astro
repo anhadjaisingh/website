@@ -102,6 +102,8 @@ const sourceBody = bodyMatch ? bodyMatch[1].trim() : sourceContent;
         client:load
         sourceHtml={sourceBody}
         annotations={annotations}
+        devMode={import.meta.env.DEV}
+        slug={slug}
       />
     </div>
   </article>
