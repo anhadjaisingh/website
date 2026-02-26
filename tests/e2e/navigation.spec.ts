@@ -14,5 +14,8 @@ test("mobile menu toggle works", async ({ page }) => {
   const menuButton = page.getByLabel("Toggle menu");
   await expect(menuButton).toBeVisible();
   await menuButton.click();
-  await expect(page.getByRole("link", { name: "Blog" })).toBeVisible();
+  const header = page.locator("header");
+  await expect(
+    header.getByRole("link", { name: "Blog", exact: true }),
+  ).toBeVisible();
 });

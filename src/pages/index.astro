@@ -38,92 +38,62 @@ const socialLinks = [
 
 <BaseLayout title="Home">
   <!-- Hero Section -->
-  <section class="pb-12 mb-16 border-b border-stone-200 dark:border-stone-700">
-    <div
-      class="flex flex-col md:flex-row items-center md:items-start gap-12 pt-8"
+  <section
+    class="pb-12 mb-16 border-b border-stone-200 dark:border-stone-700 pt-8"
+  >
+    <h1
+      class="font-serif text-5xl md:text-6xl text-stone-900 dark:text-stone-100"
     >
-      <!-- Left column: Name, bio, CTAs -->
-      <div class="flex-1 text-center md:text-left">
-        <h1
-          class="font-serif text-5xl md:text-6xl text-stone-900 dark:text-stone-100"
-        >
-          Anhad
-        </h1>
-        <p class="text-stone-500 dark:text-stone-400 mt-2 text-lg">
-          a.k.a. ffledgling
-        </p>
-        <div
-          class="prose prose-stone prose-lg dark:prose-invert max-w-none mt-6"
-        >
-          <p>
-            Hi, my name is <span class="font-serif font-extrabold">Anhad</span>,
-            and sometimes I go by <span class="font-serif font-extrabold"
-              >ffledgling</span
-            > online. Welcome to my corner of the internet. I write about software,
-            and occasionally about the many other things that catch my attention —
-            finance, golf, mechanical keyboards, watches, art, and whatever else I'm
-            exploring.
-          </p>
-        </div>
-        <div class="flex flex-wrap gap-4 mt-8 justify-center md:justify-start">
-          <a
-            href="/blog"
-            class="inline-block px-6 py-2.5 bg-accent text-white font-medium rounded-lg hover:bg-accent-hover transition-colors"
-          >
-            Read Blog
-          </a>
-          <a
-            href="/projects"
-            class="inline-block px-6 py-2.5 border border-stone-300 dark:border-stone-600 text-stone-700 dark:text-stone-300 font-medium rounded-lg hover:border-accent hover:text-accent dark:hover:border-accent dark:hover:text-accent transition-colors"
-          >
-            View Projects
-          </a>
-        </div>
-      </div>
+      Anhad
+    </h1>
+    <p class="text-stone-500 dark:text-stone-400 mt-2 text-lg">
+      a.k.a. ffledgling
+    </p>
+    <div class="prose prose-stone prose-lg dark:prose-invert max-w-none mt-6">
+      <p>
+        Hi, my name is <span class="font-serif font-extrabold">Anhad</span>, and
+        sometimes I go by <span class="font-serif font-extrabold"
+          >ffledgling</span
+        > online. Welcome to my corner of the internet. I write about software, and
+        occasionally about the many other things that catch my attention — finance,
+        golf, mechanical keyboards, watches, art, and whatever else I'm exploring.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-4 mt-8">
+      <a
+        href="/blog"
+        class="inline-block px-6 py-2.5 bg-accent text-white font-medium rounded-lg hover:bg-accent-hover transition-colors"
+      >
+        Read Blog
+      </a>
+      <a
+        href="/projects"
+        class="inline-block px-6 py-2.5 border border-stone-300 dark:border-stone-600 text-stone-700 dark:text-stone-300 font-medium rounded-lg hover:border-accent hover:text-accent dark:hover:border-accent dark:hover:text-accent transition-colors"
+      >
+        View Projects
+      </a>
+    </div>
 
-      <!-- Right column: Decorative element + social links -->
-      <div class="flex flex-col items-center gap-8 shrink-0">
-        <!-- Decorative element -->
-        <div class="relative w-48 h-48 md:w-56 md:h-56">
-          <div
-            class="absolute inset-0 bg-accent/10 dark:bg-accent/5 rounded-2xl rotate-6"
+    <!-- Social links -->
+    <div class="flex flex-wrap gap-x-6 gap-y-3 mt-8 text-sm">
+      {
+        socialLinks.map((link) => (
+          <a
+            href={link.url}
+            class="inline-flex items-center gap-1.5 text-stone-600 dark:text-stone-400 hover:text-accent transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-          </div>
-          <div
-            class="absolute inset-2 bg-accent/15 dark:bg-accent/10 rounded-2xl -rotate-3"
-          >
-          </div>
-          <div
-            class="absolute inset-4 bg-accent/20 dark:bg-accent/15 rounded-2xl rotate-1 flex items-center justify-center"
-          >
-            <span class="font-serif text-5xl text-accent/60 dark:text-accent/40"
-              >ff</span
-            >
-          </div>
-        </div>
-
-        <!-- Social links: vertical on desktop, horizontal on mobile -->
-        <div class="flex flex-row md:flex-col gap-4 md:gap-3">
-          {
-            socialLinks.map((link) => (
-              <a
-                href={link.url}
-                class="inline-flex items-center gap-2 text-stone-600 dark:text-stone-400 hover:text-accent transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <svg
-                  class="w-5 h-5"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  set:html={link.icon}
-                />
-                <span class="hidden md:inline text-sm">{link.name}</span>
-              </a>
-            ))
-          }
-        </div>
-      </div>
+            <svg
+              class="w-4 h-4"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              set:html={link.icon}
+            />
+            {link.name}
+          </a>
+        ))
+      }
     </div>
   </section>
 
