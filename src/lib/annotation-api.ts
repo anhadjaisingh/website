@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { execFile } from "node:child_process";
 import yaml from "js-yaml";
 import type { Annotation } from "./annotations";
 import type { IncomingMessage, ServerResponse } from "node:http";
@@ -34,9 +35,33 @@ async function handleCreate(req: IncomingMessage, res: ServerResponse) {
   }
 
   try {
-    // Dynamic import to avoid Vite processing Playwright through its module runner
-    const { fetchArticle } = await import("./article-fetcher");
-    const article = await fetchArticle(url);
+    // Run article fetcher as a child process to avoid Vite's module runner
+    // trying to process Playwright (a Node-only package)
+    const article = await new Promise<{
+      title: string;
+      author: string;
+      content: string;
+      slug: string;
+      sourceUrl: string;
+    }>((resolve, reject) => {
+      const script = path.join(process.cwd(), "scripts/fetch-article.ts");
+      execFile(
+        "npx",
+        ["tsx", script, url],
+        { timeout: 120_000 },
+        (err, stdout, stderr) => {
+          if (err) {
+            reject(new Error(stderr || err.message));
+            return;
+          }
+          try {
+            resolve(JSON.parse(stdout));
+          } catch {
+            reject(new Error("Failed to parse article fetcher output"));
+          }
+        },
+      );
+    });
 
     const dir = path.join(ANNOTATIONS_DIR, article.slug);
     fs.mkdirSync(dir, { recursive: true });
