@@ -213,9 +213,12 @@ export default function AnnotatedArticle({
   slug,
 }: Props) {
   const [editMode, setEditMode] = useState(false);
-  const [annotations, setAnnotations] = useState<Annotation[]>(initialAnnotations);
+  const [annotations, setAnnotations] =
+    useState<Annotation[]>(initialAnnotations);
   const [selectedText, setSelectedText] = useState("");
-  const [editingAnnotation, setEditingAnnotation] = useState<Annotation | null>(null);
+  const [editingAnnotation, setEditingAnnotation] = useState<Annotation | null>(
+    null,
+  );
   const articleRef = useRef<HTMLDivElement>(null);
 
   // Split source into paragraphs (by double newlines)
@@ -237,7 +240,10 @@ export default function AnnotatedArticle({
 
       // Only capture selections within the article
       const range = selection.getRangeAt(0);
-      if (articleRef.current && articleRef.current.contains(range.commonAncestorContainer)) {
+      if (
+        articleRef.current &&
+        articleRef.current.contains(range.commonAncestorContainer)
+      ) {
         setSelectedText(text);
       }
     };

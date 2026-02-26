@@ -34,9 +34,7 @@ export default function AnnotationForm({
   };
 
   const truncated =
-    selectedText.length > 80
-      ? selectedText.slice(0, 80) + "..."
-      : selectedText;
+    selectedText.length > 80 ? selectedText.slice(0, 80) + "..." : selectedText;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">

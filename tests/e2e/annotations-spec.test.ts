@@ -94,7 +94,7 @@ test.describe("Annotation detail page — header", () => {
 
   test("shows author attribution", async ({ page }) => {
     await page.goto("/annotations/do-things-that-dont-scale");
-    await expect(page.locator("text=Paul Graham")).toBeVisible();
+    await expect(page.locator("text=Paul Graham").first()).toBeVisible();
   });
 
   test("shows 'Annotated Reading' label", async ({ page }) => {
@@ -256,14 +256,31 @@ test.describe("Annotation rendering — click interaction", () => {
 // =============================================================================
 
 test.describe("Annotation rendering — markdown in notes", () => {
-  test.skip(
-    true,
-    "Requires markdown rendering implementation — enable after v2 authoring UI is built",
-  );
+  test("renders markdown links as clickable HTML in margin notes", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1400, height: 900 });
+    await page.goto("/annotations/do-things-that-dont-scale");
 
-  // These tests should be enabled once markdown rendering in notes is implemented.
-  // They verify that links, images, and formatting in annotation notes
-  // render as proper HTML rather than raw markdown syntax.
+    // The a6 margin note contains a markdown link
+    const link = page.locator(".annotation-note-content a", {
+      hasText: "Paul Graham's essay on growth",
+    });
+    await expect(link.first()).toBeVisible();
+    await expect(link.first()).toHaveAttribute(
+      "href",
+      "http://paulgraham.com/growth.html",
+    );
+  });
+
+  test("markdown links open in new tabs", async ({ page }) => {
+    await page.setViewportSize({ width: 1400, height: 900 });
+    await page.goto("/annotations/do-things-that-dont-scale");
+
+    const link = page.locator(".annotation-note-content a").first();
+    await expect(link).toHaveAttribute("target", "_blank");
+    await expect(link).toHaveAttribute("rel", /noopener/);
+  });
 });
 
 // =============================================================================

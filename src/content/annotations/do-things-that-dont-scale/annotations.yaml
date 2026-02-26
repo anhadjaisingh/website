@@ -23,3 +23,8 @@ annotations:
     anchor: "underestimate the power of compound growth"
     type: "inline"
     note: "This math is what makes the 'do things that don't scale' advice work. You only need to manually recruit the first cohort — after that, compound growth takes over. But you have to actually do the manual work first to prime the pump."
+
+  - id: "a6"
+    anchor: "better mousetrap"
+    type: "margin"
+    note: "See [Paul Graham's essay on growth](http://paulgraham.com/growth.html) for more on this topic."
