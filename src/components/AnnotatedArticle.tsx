@@ -216,6 +216,7 @@ export default function AnnotatedArticle({
   const [annotations, setAnnotations] =
     useState<Annotation[]>(initialAnnotations);
   const [selectedText, setSelectedText] = useState("");
+  const [selectedContext, setSelectedContext] = useState("");
   const [editingAnnotation, setEditingAnnotation] = useState<Annotation | null>(
     null,
   );
@@ -245,6 +246,25 @@ export default function AnnotatedArticle({
         articleRef.current.contains(range.commonAncestorContainer)
       ) {
         setSelectedText(text);
+
+        // Capture preceding text from the paragraph as startContext
+        const startNode = range.startContainer;
+        const paragraph = startNode.parentElement?.closest(
+          ".annotated-article > div > .mb-4",
+        );
+        if (paragraph) {
+          const fullText = paragraph.textContent || "";
+          // Find where the selection starts within this paragraph's text
+          const preRange = document.createRange();
+          preRange.setStart(paragraph, 0);
+          preRange.setEnd(range.startContainer, range.startOffset);
+          const precedingText = preRange.toString();
+          // Take last 30 chars of preceding text as context
+          const ctx = precedingText.slice(-30).trim();
+          setSelectedContext(ctx);
+        } else {
+          setSelectedContext("");
+        }
       }
     };
 
@@ -275,6 +295,7 @@ export default function AnnotatedArticle({
       const newAnnotation: Annotation = {
         id: `a${Date.now()}`,
         anchor: selectedText,
+        ...(selectedContext ? { startContext: selectedContext } : {}),
         type,
         note,
       };
@@ -282,8 +303,9 @@ export default function AnnotatedArticle({
       setAnnotations(updated);
       saveAnnotations(updated);
       setSelectedText("");
+      setSelectedContext("");
     },
-    [annotations, selectedText, saveAnnotations],
+    [annotations, selectedText, selectedContext, saveAnnotations],
   );
 
   // Handle editing an existing annotation
@@ -330,6 +352,7 @@ export default function AnnotatedArticle({
             onClick={() => {
               setEditMode(!editMode);
               setSelectedText("");
+              setSelectedContext("");
               setEditingAnnotation(null);
             }}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
