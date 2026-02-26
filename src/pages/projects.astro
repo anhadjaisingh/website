@@ -1,47 +1,52 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import { fetchTopRepos } from "../lib/github-projects";
+import { GITHUB_URL } from "../lib/social-links";
 
-const projects = (await getCollection("projects")).sort(
-  (a, b) => a.data.sortOrder - b.data.sortOrder,
-);
+const repos = await fetchTopRepos(6);
 ---
 
 <BaseLayout title="Projects">
   <h1 class="font-serif text-4xl font-bold mb-8">Projects</h1>
   <div class="grid gap-6 sm:grid-cols-2">
     {
-      projects.map((project) => (
-        <div class="border border-stone-200 rounded-lg p-6 hover:border-stone-300 transition-colors">
-          <h2 class="text-lg font-semibold mb-1">{project.data.title}</h2>
-          <p class="text-stone-600 text-sm mb-3">{project.data.description}</p>
-          <div class="flex flex-wrap gap-2 mb-3">
-            {project.data.tags.map((tag: string) => (
-              <span class="text-xs bg-stone-100 text-stone-600 px-2 py-0.5 rounded">
-                {tag}
+      repos.map((repo) => (
+        <a
+          href={repo.html_url}
+          class="block border border-stone-200 dark:border-stone-700 rounded-lg p-6 hover:border-stone-300 dark:hover:border-stone-500 transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="flex items-baseline gap-2 mb-1">
+            <h2 class="text-lg font-semibold">{repo.name}</h2>
+            {repo.stargazers_count > 0 && (
+              <span class="text-xs text-stone-400">
+                {repo.stargazers_count} stars
               </span>
-            ))}
-          </div>
-          <div class="flex gap-3 text-sm">
-            {project.data.repoUrl && (
-              <a
-                href={project.data.repoUrl}
-                class="text-accent hover:underline"
-              >
-                Source
-              </a>
-            )}
-            {project.data.demoUrl && (
-              <a
-                href={project.data.demoUrl}
-                class="text-accent hover:underline"
-              >
-                Demo
-              </a>
             )}
           </div>
-        </div>
+          <p class="text-stone-600 dark:text-stone-400 text-sm mb-3">
+            {repo.description || "No description"}
+          </p>
+          <div class="flex flex-wrap gap-2">
+            {repo.language && (
+              <span class="text-xs bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 px-2 py-0.5 rounded">
+                {repo.language}
+              </span>
+            )}
+          </div>
+        </a>
       ))
     }
+  </div>
+  <div class="mt-8 text-center">
+    <a
+      href={GITHUB_URL}
+      class="text-sm text-accent hover:text-accent-hover transition-colors"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View all repositories on GitHub &rarr;
+    </a>
   </div>
 </BaseLayout>
