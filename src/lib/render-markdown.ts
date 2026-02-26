@@ -11,6 +11,9 @@ function escapeAttr(s: string): string {
 
 const annotationMarked = new Marked({
   renderer: {
+    html() {
+      return "";
+    },
     link({ href, tokens }) {
       if (/^(javascript|data):/i.test(href ?? "")) {
         const text = this.parser.parseInline(tokens);

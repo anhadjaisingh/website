@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Annotation } from "../lib/annotations";
 
 interface AnnotationFormProps {
@@ -18,6 +18,14 @@ export default function AnnotationForm({
     existingAnnotation?.type ?? "margin",
   );
   const [note, setNote] = useState(existingAnnotation?.note ?? "");
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onCancel();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onCancel]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

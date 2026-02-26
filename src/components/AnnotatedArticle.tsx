@@ -215,7 +215,6 @@ export default function AnnotatedArticle({
   const [editMode, setEditMode] = useState(false);
   const [annotations, setAnnotations] = useState<Annotation[]>(initialAnnotations);
   const [selectedText, setSelectedText] = useState("");
-  const [selectionAnchor, setSelectionAnchor] = useState("");
   const [editingAnnotation, setEditingAnnotation] = useState<Annotation | null>(null);
   const articleRef = useRef<HTMLDivElement>(null);
 
@@ -240,7 +239,6 @@ export default function AnnotatedArticle({
       const range = selection.getRangeAt(0);
       if (articleRef.current && articleRef.current.contains(range.commonAncestorContainer)) {
         setSelectedText(text);
-        setSelectionAnchor(text);
       }
     };
 
@@ -270,7 +268,7 @@ export default function AnnotatedArticle({
     (type: "margin" | "inline", note: string) => {
       const newAnnotation: Annotation = {
         id: `a${Date.now()}`,
-        anchor: selectionAnchor,
+        anchor: selectedText,
         type,
         note,
       };
@@ -278,9 +276,8 @@ export default function AnnotatedArticle({
       setAnnotations(updated);
       saveAnnotations(updated);
       setSelectedText("");
-      setSelectionAnchor("");
     },
-    [annotations, selectionAnchor, saveAnnotations],
+    [annotations, selectedText, saveAnnotations],
   );
 
   // Handle editing an existing annotation
@@ -327,7 +324,6 @@ export default function AnnotatedArticle({
             onClick={() => {
               setEditMode(!editMode);
               setSelectedText("");
-              setSelectionAnchor("");
               setEditingAnnotation(null);
             }}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
@@ -364,7 +360,6 @@ export default function AnnotatedArticle({
           onSave={(type, note) => handleNewAnnotation(type, note)}
           onCancel={() => {
             setSelectedText("");
-            setSelectionAnchor("");
           }}
         />
       )}
