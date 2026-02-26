@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import {
   buildAnnotatedSegments,
   type Annotation,
@@ -7,7 +7,7 @@ import {
 import { renderAnnotationMarkdown } from "../lib/render-markdown";
 
 function MarkdownNote({ content }: { content: string }) {
-  const html = renderAnnotationMarkdown(content);
+  const html = useMemo(() => renderAnnotationMarkdown(content), [content]);
   return (
     <span
       className="annotation-note-content"

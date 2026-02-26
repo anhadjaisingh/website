@@ -12,10 +12,18 @@ describe("renderAnnotationMarkdown", () => {
     expect(result).toContain("<strong>bold</strong>");
   });
 
-  it("renders links", () => {
+  it("renders links with target=_blank", () => {
     const result = renderAnnotationMarkdown("[YC](https://ycombinator.com)");
     expect(result).toContain('href="https://ycombinator.com"');
+    expect(result).toContain('target="_blank"');
+    expect(result).toContain('rel="noopener noreferrer"');
     expect(result).toContain("YC");
+  });
+
+  it("blocks javascript: URIs in links", () => {
+    const result = renderAnnotationMarkdown("[click](javascript:alert(1))");
+    expect(result).not.toContain("href");
+    expect(result).toContain("click");
   });
 
   it("renders images", () => {
