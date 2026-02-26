@@ -1,8 +1,6 @@
-import { Readability } from "@mozilla/readability";
-import { parseHTML } from "linkedom";
-import TurndownService from "turndown";
 import fs from "node:fs";
 import path from "node:path";
+import { fetchArticle } from "../src/lib/article-fetcher";
 
 const url = process.argv[2];
 
@@ -14,76 +12,39 @@ if (!url) {
 async function main() {
   console.log(`Fetching: ${url}`);
 
-  const response = await fetch(url);
-  if (!response.ok) {
-    console.error(`Failed to fetch: ${response.status} ${response.statusText}`);
-    process.exit(1);
-  }
+  const article = await fetchArticle(url);
 
-  const html = await response.text();
-
-  // Parse HTML and extract readable content
-  const { document } = parseHTML(html);
-  const reader = new Readability(document);
-  const article = reader.parse();
-
-  if (!article?.content) {
-    console.error("Could not extract readable content from the page.");
-    process.exit(1);
-  }
-
-  // Convert HTML content to markdown
-  const turndown = new TurndownService({
-    headingStyle: "atx",
-    codeBlockStyle: "fenced",
-  });
-  const markdown = turndown.turndown(article.content);
-
-  // Generate slug from title
-  const slug = (article.title || "untitled")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-
-  // Create directory
-  const dir = path.join(process.cwd(), "src/content/annotations", slug);
+  const dir = path.join(process.cwd(), "src/content/annotations", article.slug);
   fs.mkdirSync(dir, { recursive: true });
 
   // Write source.md
   const today = new Date().toISOString().split("T")[0];
   const frontmatter = [
     "---",
-    `title: "${article.title?.replace(/"/g, '\\"') || "Untitled"}"`,
-    `author: ""`,
+    `title: "${article.title.replace(/"/g, '\\"')}"`,
+    `author: "${article.author.replace(/"/g, '\\"')}"`,
     `sourceUrl: "${url}"`,
     `snapshotDate: ${today}`,
-    `description: "My annotated reading of ${article.title || "this article"}."`,
+    `description: "My annotated reading of ${article.title.replace(/"/g, '\\"')}."`,
     `tags: []`,
     "---",
   ].join("\n");
 
   const sourcePath = path.join(dir, "source.md");
-  fs.writeFileSync(sourcePath, `${frontmatter}\n\n${markdown}\n`);
+  fs.writeFileSync(sourcePath, `${frontmatter}\n\n${article.content}\n`);
 
-  // Write starter annotations.yaml
-  const starterYaml = `annotations:
-  # Add your annotations here. Example:
-  # - id: "a1"
-  #   anchor: "text to highlight"
-  #   type: "margin"  # or "inline"
-  #   note: "Your commentary here."
-`;
-
+  // Write empty annotations.yaml
   const yamlPath = path.join(dir, "annotations.yaml");
-  fs.writeFileSync(yamlPath, starterYaml);
+  fs.writeFileSync(yamlPath, "annotations: []\n");
 
   console.log(`\nCreated annotation directory:`);
   console.log(`  ${sourcePath}`);
   console.log(`  ${yamlPath}`);
   console.log(`\nNext steps:`);
-  console.log(`  1. Fill in the "author" field in source.md frontmatter`);
-  console.log(`  2. Edit annotations.yaml to add your annotations`);
-  console.log(`  3. Run 'npm run dev' to preview`);
+  console.log(
+    `  1. Fill in the "author" field in source.md if not auto-detected`,
+  );
+  console.log(`  2. Run 'npm run dev' and annotate in the browser`);
 }
 
 main().catch((err) => {
