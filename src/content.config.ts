@@ -26,16 +26,4 @@ const annotations = defineCollection({
   }),
 });
 
-const projects = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    tags: z.array(z.string()).default([]),
-    repoUrl: z.string().url().optional(),
-    demoUrl: z.string().url().optional(),
-    sortOrder: z.number().default(0),
-  }),
-});
-
-export const collections = { blog, projects, annotations };
+export const collections = { blog, annotations };

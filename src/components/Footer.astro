@@ -1,4 +1,5 @@
 ---
+import { WEBSITE_REPO_URL } from "../lib/social-links";
 const year = new Date().getFullYear();
 ---
 
@@ -8,7 +9,7 @@ const year = new Date().getFullYear();
   >
     <p>
       <a
-        href="https://github.com/anhadjaisingh/website"
+        href={WEBSITE_REPO_URL}
         class="text-accent hover:underline"
         target="_blank"
         rel="noopener noreferrer">Website Source</a
