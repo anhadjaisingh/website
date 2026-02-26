@@ -4,6 +4,7 @@ dist/
 .playwright-mcp/
 .claude/*
 !.claude/skills/
+!.claude/settings.local.json
 .old-blog/
 test-results/
 *.png
