@@ -12,6 +12,6 @@ test("blog listing shows posts", async ({ page }) => {
 });
 
 test("blog post page loads", async ({ page }) => {
-  await page.goto("/blog/hello-world");
-  await expect(page.locator("h1")).toContainText("Hello World");
+  await page.goto("/blog/claude-code-investigating-itself");
+  await expect(page.locator("h1")).toContainText("Claude Code");
 });

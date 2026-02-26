@@ -5,7 +5,7 @@ test("header navigation links are present on desktop", async ({ page }) => {
   const nav = page.locator("header nav");
   await expect(nav.getByRole("link", { name: "Home" })).toBeVisible();
   await expect(nav.getByRole("link", { name: "Blog" })).toBeVisible();
-  await expect(nav.getByRole("link", { name: "About" })).toBeVisible();
+  await expect(nav.getByRole("link", { name: "Annotations" })).toBeVisible();
 });
 
 test("mobile menu toggle works", async ({ page }) => {
@@ -14,5 +14,8 @@ test("mobile menu toggle works", async ({ page }) => {
   const menuButton = page.getByLabel("Toggle menu");
   await expect(menuButton).toBeVisible();
   await menuButton.click();
-  await expect(page.getByRole("link", { name: "Blog" })).toBeVisible();
+  const header = page.locator("header");
+  await expect(
+    header.getByRole("link", { name: "Blog", exact: true }),
+  ).toBeVisible();
 });

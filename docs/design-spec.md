@@ -27,11 +27,24 @@ Canonical source of truth for design decisions. Update this when decisions chang
 - **Nav font weight:** font-medium (font-semibold when active)
 - **Theme toggle:** ring-2 outline style (not filled background)
 
-## Homepage
+## Homepage — Split Hero + Content Layout
 
-- **Bio:** Single paragraph intro, no email address on site
-- **Name styling:** "Anhad" and "ffledgling" in font-serif font-extrabold
-- **Social links:** Centered row with SVG icons (GitHub, LinkedIn, Threads), text-sm, positioned near footer with mt-auto pt-16
+Two-section layout: hero at top, three-column content grid below.
+
+### Hero Section
+
+- **Layout:** Two-column split on desktop (flex-row), stacked on mobile (flex-col)
+- **Left column:** Large name "Anhad" (font-serif text-5xl md:text-6xl), subtitle "a.k.a. ffledgling", bio paragraph with serif-bold names, two CTA buttons (Read Blog crimson filled, View Projects outline/ghost)
+- **Right column:** Decorative element (three layered rotated rounded rectangles in accent color at low opacity with "ff" text centered), social links (GitHub, LinkedIn, Threads) vertical on desktop with icon + handle, horizontal on mobile with just icons
+- **Separator:** border-b border-stone-200 dark:border-stone-700 with mb-16 pb-12
+
+### Content Grid
+
+- **Layout:** Three equal columns on desktop (grid-cols-1 md:grid-cols-3 gap-8)
+- **Column 1 — Latest Posts:** 3 most recent non-draft blog posts, each with date (text-xs) and title (text-sm font-medium) linking to /blog/{post.id}
+- **Column 2 — Projects:** First project by sortOrder with title, description (text-xs), and "Source →" link to repoUrl
+- **Column 3 — Readings:** First annotated reading with title, "by {author}", and description (text-xs), linking to /annotations/{id without /source suffix}
+- **Section headings:** font-serif text-xl with border-b underline
 
 ## Footer
 
